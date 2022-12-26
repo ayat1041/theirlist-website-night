@@ -3,6 +3,16 @@
 
 <section class="list_detail" id="list-det-id">
   <h3>{{musiclist.title}}</h3>
+  <div class="average-rating">
+    <span class="stars-post-comments">
+        <span class="fa fa-star {% if musiclist.average_rating > 0 %} checked {% endif %}"></span>
+        <span class="fa fa-star {% if musiclist.average_rating > 1 %} checked {% endif %}"></span>
+        <span class="fa fa-star {% if musiclist.average_rating > 2 %} checked {% endif %}"></span>
+        <span class="fa fa-star {% if musiclist.average_rating > 3 %} checked {% endif %}" ></span>
+        <span class="fa fa-star {% if musiclist.average_rating > 4 %} checked {% endif %}"></span>
+    </span>
+    </div>
+    <br>
   <div class="detail-up-del">
     {% if user.id == musiclist.creator.id %}
     <a href="{% url 'app:delete_music' musiclist.slug %}"

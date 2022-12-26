@@ -30,12 +30,13 @@
       </div>
       <div class="rating">
         <span class="star-headline">
-        <span class="fa fa-star checked"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
-        <span class="fa fa-star"></span>
+          <span class="fa fa-star {% if lola.average_rating > 0 %} checked {% endif %}"></span>
+          <span class="fa fa-star {% if lola.average_rating > 1 %} checked {% endif %}"></span>
+          <span class="fa fa-star {% if lola.average_rating > 2 %} checked {% endif %}"></span>
+          <span class="fa fa-star {% if lola.average_rating > 3 %} checked {% endif %}" ></span>
+          <span class="fa fa-star {% if lola.average_rating > 4 %} checked {% endif %}"></span>
         </span>
+        <small> - {{lola.count_rating}} users .<img class="comments_count" src="{% static 'app/images/comments.png' %}">{{lola.count_comments}}</small>
       </div>
       
         {% for tag in lola.genre.all %}

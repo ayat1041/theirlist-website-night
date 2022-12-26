@@ -79,7 +79,7 @@
         <div class="Author">
           <small>Author : {{lola.creator.username}}<span>{{lola.posted}}</span></small>
         </div>
-        {% if lola.type == 'Movie' %}
+        {% comment %} {% if lola.type == 'Movie' %} {% endcomment %}
         <div class="rating">
           <span class="star-headline">
             <span class="fa fa-star {% if lola.average_rating > 0 %} checked {% endif %}"></span>
@@ -90,7 +90,7 @@
           </span>
           <small> - {{lola.count_rating}} users .<img class="comments_count" src="{% static 'app/images/comments.png' %}">{{lola.count_comments}}</small>
         </div>
-        {% endif %}
+        {% comment %} {% endif %} {% endcomment %}
           {% if lola.type == 'Music' %}
             {% for i in genremusic %}
               {% for tag in i.genre.all %}
