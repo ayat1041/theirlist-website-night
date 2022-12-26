@@ -39,10 +39,10 @@ urlpatterns = [
     path('book/<str:query>',views.book, name='book'),
     path('all',views.all, name='all'),
     path('create_comment',views.create_comment, name='create_comment'),
-    path('create_starr',views.create_starr, name='create_starr'),
     path('create_musiccomment',views.create_musiccomment, name='create_musiccomment'),
     path('create_bookcomment',views.create_bookcomment, name='create_bookcomment'),
-    # path('list/comment/',views.listcomments, name='ListComments'),
+    path('create_starr',views.create_starr, name='create_starr'),
+    path('create_musicstarr',views.create_musicstarr, name='create_musicstarr'),
+    path('create_bookstarr',views.create_bookstarr, name='create_bookstarr'),
     
-
 ]

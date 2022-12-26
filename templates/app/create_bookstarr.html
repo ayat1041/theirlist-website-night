@@ -1,0 +1,48 @@
+<style>
+    .bookstarr_cont .bookstarr select{
+        display: none;
+    }
+    .bookstarr_cont .bookstarr p input{
+        display: none;
+    }
+    .bookstarr_cont .bookstarr button{
+        margin-top: 28px;
+        background-color: Dodgerblue;
+        padding: 6px 18px;
+        cursor: pointer;
+        transition: all 500ms ease-in-out;
+    }
+    .bookstarr_cont .bookstarr button:hover{
+        background-color: Green;
+    }
+    </style>
+    
+    <div class="bookstarr_cont">
+    <form class = "bookstarr" method="POST" action="{% url 'app:create_bookstarr' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            <select name="user" required="" id="id_user">
+                <option value="{{user.pk}}" selected="">{{user.username}}</option>
+              </select>
+        </p>
+        <p>
+            <select name="list" required="" id="id_BookList">
+                <option value="{{booklist.pk}}" selected="">{{booklist.title}}</option>
+              </select>
+        </p>
+        <div class="comment-stars">
+            <span class="stars-post-comments">
+                <span class="fa fa-star" id="st1"></span>
+                <span class="fa fa-star" id="st2"></span>
+                <span class="fa fa-star" id="st3"></span>
+                <span class="fa fa-star" id="st4"></span>
+                <span class="fa fa-star" id="st5"></span>
+            </span>
+        </div>
+        <p>
+        <input type="number" name="rate" value="0" required="" id="id_rate" placeholder="Rating">
+        </p>
+    <div><button type="submit">Rate</button></div>
+    </form>
+    </div>
+        

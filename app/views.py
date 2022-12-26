@@ -1,5 +1,5 @@
 from platformdirs import user_state_path
-from app.models import List,MusicList,BookList,Review,MusicReview,BookReview,Profile,Starr
+from app.models import List,MusicList,BookList,Review,MusicReview,BookReview,Profile,Starr,MusicStarr,BookStarr
 from django.shortcuts import redirect, render, HttpResponse,HttpResponseRedirect
 from django.urls import reverse_lazy,reverse
 from django.views.generic import UpdateView,TemplateView,ListView,DetailView,CreateView,DeleteView
@@ -8,7 +8,7 @@ from datetime import timedelta
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import ReviewForm,BookReviewForm,MusicReviewForm,StarrForm
+from .forms import ReviewForm,BookReviewForm,MusicReviewForm,StarrForm,MusicStarrForm,BookStarrForm
 
 # Create your views here.
 
@@ -107,6 +107,8 @@ class TheirDetailBookView(DetailView): #books
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         modell = BookReview.objects.all()
+        bookstarr = BookStarr.objects.all()
+        context["bookstarr"] = bookstarr
         context["modam"] = modell
         # context["form"] = BookReviewForm()
         return context
@@ -116,6 +118,8 @@ class TheirDetailMusicView(DetailView): #music
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         modell = MusicReview.objects.all()
+        musicstarr = MusicStarr.objects.all()
+        context["musicstarr"] = musicstarr
         context["modam"] = modell
         # context["form"] = MusicReviewForm()
         return context
@@ -128,12 +132,8 @@ class TheirDetailView(DetailView):
         starr = Starr.objects.all()
         context["starr"] = starr
         context["modam"] = modell
-        # context["form"] = ReviewForm()
         return context
-        #return redirect(reverse('/all', {'context': context}))
-    
 
-    
 class ListCreateBookView(CreateView): #book
     model = BookList
     # fields = "__all__"
@@ -267,9 +267,7 @@ def all(request):
 
     return render(request, 'app/all.html', params)
 
-# def listcomments(request): 
-#     modamo = Review.objects.all()
-#     return render(request, 'app/list_comment.html', {'modamo' : modamo})
+
 
 def create_comment(request):
     context = {}
@@ -314,3 +312,23 @@ def create_starr(request):
         context['form'] = form
         return render(request, "app/already_rated.html", context)
         
+
+def create_musicstarr(request):
+    context = {}
+    form = MusicStarrForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        context['form'] = form
+        return render(request, "app/already_rated.html", context)
+
+def create_bookstarr(request):
+    context = {}
+    form = BookStarrForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        context['form'] = form
+        return render(request, "app/already_rated.html", context)

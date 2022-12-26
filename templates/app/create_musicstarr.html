@@ -1,0 +1,48 @@
+<style>
+    .musicstarr_cont .musicstarr select{
+        display: none;
+    }
+    .musicstarr_cont .musicstarr p input{
+        display: none;
+    }
+    .musicstarr_cont .musicstarr button{
+        margin-top: 28px;
+        background-color: Dodgerblue;
+        padding: 6px 18px;
+        cursor: pointer;
+        transition: all 500ms ease-in-out;
+    }
+    .musicstarr_cont .musicstarr button:hover{
+        background-color: Green;
+    }
+    </style>
+    
+    <div class="musicstarr_cont">
+    <form class = "musicstarr" method="POST" action="{% url 'app:create_musicstarr' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>
+            <select name="user" required="" id="id_user">
+                <option value="{{user.pk}}" selected="">{{user.username}}</option>
+              </select>
+        </p>
+        <p>
+            <select name="list" required="" id="id_MusicList">
+                <option value="{{musiclist.pk}}" selected="">{{musiclist.title}}</option>
+              </select>
+        </p>
+        <div class="comment-stars">
+            <span class="stars-post-comments">
+                <span class="fa fa-star" id="st1"></span>
+                <span class="fa fa-star" id="st2"></span>
+                <span class="fa fa-star" id="st3"></span>
+                <span class="fa fa-star" id="st4"></span>
+                <span class="fa fa-star" id="st5"></span>
+            </span>
+        </div>
+        <p>
+        <input type="number" name="rate" value="0" required="" id="id_rate" placeholder="Rating">
+        </p>
+    <div><button type="submit">Rate</button></div>
+    </form>
+    </div>
+        
