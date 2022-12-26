@@ -694,6 +694,7 @@ li a .login_sub{
 }
 .average-rating{
     padding: 0px 28px;
+    margin-top: 7px;
     background-color: #004055;
 }
 .list_detail small{
@@ -1125,7 +1126,7 @@ comments */
 }
 .comments_count{
     height: 16px;
-    margin-bottom: -3px;
+    margin-bottom: -4px;
     margin-left: 4px;
     margin-right: 4px;
 }
