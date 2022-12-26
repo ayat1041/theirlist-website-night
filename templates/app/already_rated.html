@@ -1,0 +1,40 @@
+{% extends "index.html" %} 
+{% load static %} 
+{% block content %}
+<style>
+.rating_twice{
+    padding: 60px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-height: 80%;
+    {% comment %} background-color: purple; {% endcomment %}
+    justify-content: center;
+    align-items: center;
+}
+.rating_twice h1{
+    coloe: inherit;
+    font-size: 2rem;
+}
+.rating_twice button{
+    width: max-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+    color: white;
+    background-color: var(--rd);
+    border: none;
+    border-radius: 2px;
+    margin: 20px;
+    cursor: pointer;
+}
+</style>
+<div class="rating_twice">
+<h1>
+Sorry you cant rate twice!
+</h1>
+<button onClick="javascript:history.go(-1);" title="Go back">Go back</button>
+</div>
+{% endblock content %}

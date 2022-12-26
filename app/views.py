@@ -312,6 +312,5 @@ def create_starr(request):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     else:
         context['form'] = form
-        #return render(request, "app/create_starr.html", context)
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+        return render(request, "app/already_rated.html", context)
         
