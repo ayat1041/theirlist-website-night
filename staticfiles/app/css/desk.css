@@ -692,6 +692,10 @@ li a .login_sub{
     padding-top: 20px;
     font-weight: bold;
 }
+.average-rating{
+    padding: 0px 28px;
+    background-color: #004055;
+}
 .list_detail small{
     padding: 10px 25px;
 }

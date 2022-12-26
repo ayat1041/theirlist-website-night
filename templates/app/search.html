@@ -79,15 +79,18 @@
         <div class="Author">
           <small>Author : {{lola.creator.username}}<span>{{lola.posted}}</span></small>
         </div>
+        {% if lola.type == 'Movie' %}
         <div class="rating">
           <span class="star-headline">
-          <span class="fa fa-star checked"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
-          <span class="fa fa-star"></span>
+            <span class="fa fa-star {% if lola.average_rating > 0 %} checked {% endif %}"></span>
+            <span class="fa fa-star {% if lola.average_rating > 1 %} checked {% endif %}"></span>
+            <span class="fa fa-star {% if lola.average_rating > 2 %} checked {% endif %}"></span>
+            <span class="fa fa-star {% if lola.average_rating > 3 %} checked {% endif %}" ></span>
+            <span class="fa fa-star {% if lola.average_rating > 4 %} checked {% endif %}"></span>
           </span>
+          <small> - {{lola.count_rating}} users</small>
         </div>
+        {% endif %}
           {% if lola.type == 'Music' %}
             {% for i in genremusic %}
               {% for tag in i.genre.all %}

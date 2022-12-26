@@ -6,7 +6,7 @@ from django.urls import reverse_lazy,reverse
 from django.utils.text import slugify
 from django.conf import settings
 from django.contrib.auth.models import User
-#alllist
+from django.db.models import Avg
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -74,9 +74,14 @@ class List(models.Model):
     spoiler = models.BooleanField(default=False,null=True, choices = spoiler_choices)
     slug = models.SlugField(max_length= 300,null=True, blank = True, unique=True)
 
+    def average_rating(self) -> float:
+        return Starr.objects.filter(list=self).aggregate(Avg("rate"))["rate__avg"] or 0
+
+    def count_rating(self):    
+        return Starr.objects.filter(list=self).count()
 
     def __str__(self):
-        return f'{self.title}|{self.creator}'
+        return f'{self.title}|{self.creator}|{self.average_rating()}|{self.count_rating()}'
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title + str(self.posted))
         super(List,self).save(*args, **kwargs)
@@ -152,6 +157,8 @@ class Starr(models.Model):
 
     def __str__(self):
         return self.user.username + " | " + self.list.title + " | " + str(self.rate)  
+    
+    
 
 class MusicStarr(models.Model):
     user = models.ForeignKey(User,models.CASCADE)
