@@ -148,6 +148,9 @@
     .slide-arrow .first{
         margin-right: -24px;
     }
+    .slide-arrow .second{
+        margin-right: -2px;
+    }
     .slide-menu{
         position: fixed;
         right: -300px;
@@ -175,11 +178,16 @@
     .slide-menu .close h4{
         color: white;
     }
+    @media only screen and (max-width: 900px) {
+        .slide-arrow h4{
+            text-indent: -9999px;
+        }
+    }
 </style>
 <div class="slider-cont">
 <div class="slide-arrow" id="related-arrow-btn">
     <img class= "first" src="{% static 'app/images/open-related.png' %}">
-    <img src="{% static 'app/images/open-related.png' %}">
+    <img class= "second" src="{% static 'app/images/open-related.png' %}">
     <h4>Related</h4>
 </div>
 <div class="slide-menu" id="related-slide-menu">

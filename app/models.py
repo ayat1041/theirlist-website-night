@@ -80,8 +80,10 @@ class List(models.Model):
     def count_rating(self):    
         return Starr.objects.filter(list=self).count()
 
+    def count_comments(self):    
+        return Review.objects.filter(List=self).count()
     def __str__(self):
-        return f'{self.title}|{self.creator}|{self.average_rating()}|{self.count_rating()}'
+        return f'{self.title}|{self.creator}|{self.average_rating()}|{self.count_rating()}|{self.count_comments()}'
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title + str(self.posted))
         super(List,self).save(*args, **kwargs)

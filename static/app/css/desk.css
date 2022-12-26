@@ -1123,3 +1123,9 @@ comments */
 .star-headline span{
     font-size: 14px;
 }
+.comments_count{
+    height: 16px;
+    margin-bottom: -3px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
