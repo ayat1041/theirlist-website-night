@@ -1,0 +1,41 @@
+{% extends "app/edit_prof_base.html" %} 
+{% load static %} 
+{% block profile %}
+
+<div class="headline headline-top" id="headlline-top"><div class="head-cont-all" ><h1 class="headline-all">Movie & series</h1></div><span class="minimize" id="topmini"><img src="{% static 'app/images/minimize.png' %}" id="miniimg" alt=""></span></div>
+<div class="title-com" id="title-comment">
+    {% for lola in movie %}
+    {% if lola.user.username == user.username %}
+    <div class="comment-block">
+        <div class = "comment-body">{{lola.comment|truncatewords:6}}</div>
+        <div class = "comment-post">{{lola.List.title}}</div>
+        <div class = "comment-date">{{lola.created_at}}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+    <div class="headline headline-middle" id="headline-middle"><div class="head-cont-all" ><h1 class="headline-all">Music</h1></div><span class="minimize" id="centmini"><img src="{% static 'app/images/minimize.png' %}" id="miniimg2" alt=""></span></div>
+    <div class="title-com" id="title-comment">
+    {% for lola in music %}
+    {% if lola.user.username == user.username %}
+    <div class="comment-block">
+        <div class = "comment-body">{{lola.comment|truncatewords:6}}</div>
+        <div class = "comment-post">{{lola.MusicList.title}}</div>
+        <div class = "comment-date">{{lola.created_at}}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+    <div class="headline headline-bottom" id="headline-bottom"><div class="head-cont-all" ><h1 class="headline-all">Book</h1></div><span class="minimize" id="bottommini"><img src="{% static 'app/images/minimize.png' %}" id="miniimg3" alt=""></span></div>
+    <div class="title-com" id="title-comment">
+    {% for lola in book %}
+    {% if lola.user.username == user.username %}
+    <div class="comment-block">
+        <div class = "comment-body">{{lola.comment|truncatewords:6}}</div>
+        <div class = "comment-post">{{lola.BookList.title}}</div>
+        <div class = "comment-date">{{lola.created_at}}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

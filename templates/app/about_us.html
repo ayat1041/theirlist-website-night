@@ -1,0 +1,83 @@
+{% extends "index.html" %} 
+{% load static %}
+{% block title %}About | TheirList{% endblock title %}
+{% block content %}
+<style>
+  @keyframes slideIn{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+  }
+  .about_us {
+    animation: 250ms ease-out 0s 1 slideIn;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+    width: 100vw;
+    max-width: 100%;
+    {% comment %} background-color: red; {% endcomment %}
+    padding: 120px 14vw;
+    padding-top: 0px;
+  }
+  #about_us_body {
+    {% comment %} color: white; {% endcomment %}
+    color: black;
+    font-weight: 100;
+  }
+  .about_us_h1_dark_mode{
+    color: white!important;
+  }
+
+  
+  .about_us_img img {
+    height: 20vw;
+    filter: drop-shadow(1px 1px 4px black);
+  }
+  .about_us_cont{
+    font-size: 8px;
+  }
+</style>
+<div class="about_us">
+  <div class="about_us_img">
+    <img src="{% static 'app/images/logo_no_motto.svg' %}" />
+  </div>
+  <div class="about_us_cont">
+    <h1 id="about_us_body">
+      Theirlist is a website where you get suggesitions of Movie, Book, Music as
+      lists.<br />
+      How to know if they are followable? Just check the ratings if the other
+      users liked it enough or not.
+      <br /><br />
+      Here is all the features we have for you _<br /><br />
+      <ul>
+        <li>
+          <p>
+            Create/Delete/Update the list of your own (requires signing up).
+          </p>
+        </li>
+        <li><p>Add/view list in 3 separate categories.</p></li>
+        <li><p>Every categories as their own genre sets.</p></li>
+        <li>
+          <p>
+            To keep the quality pure we use rating systems. So rate lists and
+            check others lists rating reviews.
+          </p>
+        </li>
+        <li><p>Write a review (comments)</p></li>
+        <li><p>Search!</p></li>
+        <li>
+          <p>Chat with other users regarding any movies, books, music.</p>
+        </li>
+        <li><p>User profile.</p></li>
+      </ul>
+    </h1>
+  </div>
+</div>
+
+{% endblock content %}

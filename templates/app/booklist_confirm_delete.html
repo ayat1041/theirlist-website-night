@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<style>
+.delete_confirm{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.delete_confirm button{
+    padding: 4px 12px;
+    position: relative;
+    border: none;
+    outline: none;
+    background-color: var(--rd);
+    margin: 8px 0;
+    font-size: 1rem;
+    color: white;
+    border-radius: 2px;
+    width: 80px;
+    transition: all 100ms ease-in-out;
+}
+.delete_confirm button:hover{
+    background-color: #121212;
+}
+.delete_confirm h6{
+    padding: 16px 28px;
+    color: wheat;
+    font-size: 22px;
+    align-items: center;
+}
+</style>
+<section class="delete_confirm">
+<h6>Are you sure you wanna delete this list ? This can't be undone.</h6>
+<form method="POST">
+    {% csrf_token %}
+    <button class = "list-delete" type = "submit">Delete</button>
+</form>
+<a href="/home/list/"><button class = "go-back" type = "submit">Go back</button></a>
+</section>
+{% endblock content %}

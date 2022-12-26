@@ -1,0 +1,135 @@
+{% extends "index.html" %} 
+{% load static %} 
+{% block content %}
+<style>
+  .search_none{
+    color: var(--rd);
+    align-text: center;
+    margin-top: 100px;
+    margin-left: 10%;
+    font-size: 36px;
+  }
+  .search_none strong{
+    color: white;
+    font-weight: bold;
+  }
+  @keyframes slideIn{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+  }
+  .resssssult{
+    animation: 250ms ease-in-out 0s 1 slideIn;
+  }
+  
+    
+</style>
+<section class="resssssult">
+    <div class="contain-sec" id="contain-sec7">
+      {% if allPosts|length < 1 %}
+      <p class="search_none" style="margin-top: 100px;">We dont have anything like <strong>{{query}}</strong> <span> :(</span><p>
+      {% endif %}
+      {% for lola in allPosts %}
+      <div class="elements">
+        <div class="thumb">
+          {% if lola.type == 'Music' %}
+          <img src="{% static 'app/images/music-poster.jpg' %}" width="100px" />
+          {% elif lola.type == 'Movie' %}
+          <img src="{% static 'app/images/movie-poster.jpg' %}" width="100px" />
+          {% elif lola.type == 'book' %}
+          <img src="{% static 'app/images/book-poster.jpg' %}" width="100px" />
+          {%  endif %}
+        </div>
+        {% if lola.spoiler == True %}
+          <div class="spoiler"><img src="{% static 'app/images/spoilerr.png' %}" width="100px" /></div>
+        {% endif %}
+        <div class="Title">
+          {% if lola.type == 'Music' %}
+          <a href="{% url 'app:musiclist_detail' lola.slug %}"><h4 class="tit">{{lola.title}}</h4></a>
+          {% elif lola.type == 'Movie' %}
+          <a href="{% url 'app:list_detail' lola.slug %}"><h4 class="tit">{{lola.title}}</h4></a>
+          {% elif lola.type == 'book' %}
+          <a href="{% url 'app:booklist_detail' lola.slug %}"><h4 class="tit">{{lola.title}}</h4></a>
+          {%  endif %}
+          {% if user.id == lola.creator.id %}
+          {% if lola.type == 'Movie' %}
+          <a href="{% url 'app:delete_movie' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+          <a href="{% url 'app:update_list' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+          {% elif lola.type == 'Music' %}
+          <a href="{% url 'app:delete_music' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+          <a href="{% url 'app:update_musiclist' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+          {% elif lola.type == 'book' %}
+          <a href="{% url 'app:delete_book' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+          <a href="{% url 'app:update_booklist' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+          {% endif %}
+          
+          {% else %}
+          <img src ="{% static 'app/images/delete-dis.png' %}">
+          <img src ="{% static 'app/images/edit-dis.png' %}">
+          {% endif %}
+        </div>
+        <style>
+          .Title img{
+            height: 14px;
+          }
+        </style>
+        <div class="Author">
+          <small>Author : {{lola.creator.username}}<span>{{lola.posted}}</span></small>
+        </div>
+        <div class="rating">
+          <span class="star-headline">
+          <span class="fa fa-star checked"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          <span class="fa fa-star"></span>
+          </span>
+        </div>
+          {% if lola.type == 'Music' %}
+            {% for i in genremusic %}
+              {% for tag in i.genre.all %}
+                {% if lola.id == i.id %}
+                    <div class="Genre">
+                      <a href="{% url 'app:music' query=tag %}">
+                        <small>{{ tag }}</small>
+                      </a>
+                    </div>
+                      {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+          {% elif lola.type == 'book' %}
+            {% for i in genrebook %}
+              {% for tag in i.genre.all %}
+                {% if lola.id == i.id %}
+                <div class="Genre">
+                  <a href="{% url 'app:book' query=tag %}">
+                    <small>{{ tag }}</small>
+                  </a>
+                  </div>
+                    {% endif %}
+                  {% endfor %}
+                  {% endfor %}
+          {% elif lola.type == 'Movie' %}
+            {% for i in genremovie %}
+              {% for tag in i.genre.all %}
+                {% if lola.id == i.id %}
+                <div class="Genre">
+                  <a href="{% url 'app:film' query=tag %}">
+                    <small>{{ tag }}</small>
+                  </a>
+                  </div>
+                    {% endif %}
+                  {% endfor %}
+                  {% endfor %}
+                    {% endif %}
+                </div>
+      {% endfor %}
+
+    </div>
+
+  </section>
+  
+{% endblock content %}

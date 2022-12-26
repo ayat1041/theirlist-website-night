@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}TheirList {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'app/css/desk.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/css/mobile.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/css/search.css' %}" />
+    <link rel="stylesheet" href="{% static 'app/css/content_css.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% comment %} <link rel="stylesheet" href="{% static 'app/css/addlist_form.css' %}" /> {% endcomment %}
+    <link rel="shortcut icon" href="{% static 'app/images/meta.ico' %}" type="image/x-icon">
+    {% block css %}
+    {% endblock css %}
+    {% comment %} <link rel="stylesheet" href="../css/desk.css" />
+    <link rel="stylesheet" href="../css/mobile.css" />
+    <link rel="stylesheet" href="../css/search.css">
+    <link rel="stylesheet" href="../css/content_css.css"> {% endcomment %}
+    
+  </head>
+  <header>
+    <nav class="nav" id="nav">
+      <div class="logo"></div>
+      <style>
+        .logo{
+          background: url("{% static 'app/images/logo.svg' %}") no-repeat;
+          filter: drop-shadow(1px 1px 1px #00000090);
+      }
+        @media only screen and (max-width: 900px) {
+          .logo{
+            background: url("{% static 'app/images/logo-small.svg' %}") no-repeat;
+            filter: drop-shadow(0px 0px 0px black);
+        }
+        }
+      </style>
+      <div class="wrap">     
+        <form method="GET" action="{% url 'app:search' %}">
+          {% comment %} {% csrf_token %} {% endcomment %}
+        <div class="search">
+
+          <input
+            type="text"
+            class="searchTerm"
+            placeholder="Lets find out!"
+            name="query"
+            id="query"
+          />
+          <button type="submit" class="searchButton" id="query-btn">
+
+            {% comment %} {% static 'app/images/search.png' %} {% endcomment %}
+            <img src="{% static 'app/images/search.png' %}">
+          </button>
+
+        </div>
+      </form>
+      </div>
+    </div>
+    <div class="nav-menu-list">
+        <ul class="nav-main-op">
+            <li>
+              <a href="{% url 'app:list' %}" class="moviesnseries">Movie/Series</a><span class="nav-movie-expand"><img src="{% static 'app/images/dropdown.png' %}" alt=""></span>
+            </li>
+            <li>
+              <a href="{% url 'app:musiclist' %}">Music</a><span class="nav-music-expand"><img src="{% static 'app/images/dropdown.png' %}" alt=""></span>
+            </li>
+            <li>
+              <a href="{% url 'app:booklist' %}">Book</a><span class="nav-book-expand"><img src="{% static 'app/images/dropdown.png' %}" alt=""></span>
+            </li>
+          </ul>
+      </div>
+      <div class="menu-btn">
+        <div class="menu-btn__burger"></div>
+      </div>
+    </nav>
+
+
+    <div class="nav-sub-menu-container">
+      <div class="movie" id="movie-disp">
+        <div class="movie-nav-more">
+          <a href="{% url 'app:film' query="action" %}">Action</a>
+          <a href="{% url 'app:film' query="comedy" %}">Comedy</a>
+          <a href="{% url 'app:film' query="thriller" %}">Thriller</a>
+          <a href="{% url 'app:film' query="romance" %}">Romance</a>
+          <a href="{% url 'app:film' query="Drama" %}">Drama</a>
+          <a href="{% url 'app:film' query="Crime" %}">Crime</a>
+          <a href="{% url 'app:film' query="Horror" %}">Horror</a>
+          <a href="{% url 'app:film' query="classic" %}">Classic</a>
+          <a href="{% url 'app:film' query="mystery" %}">Mystery</a>
+          <a href="{% url 'app:film' query="adventure" %}">adventure</a>
+          <a href="{% url 'app:film' query="others" %}">Others</a>
+        </div>
+      </div>
+      <div class="music" id="music-disp">
+        <div class="music-nav-more">
+          <a href="{% url 'app:music' query="rock" %}">Rock</a>
+          <a href="{% url 'app:music' query="pop" %}">Pop</a>
+          <a href="{% url 'app:music' query="classic" %}">Classic</a>
+          <a href="{% url 'app:music' query="folk" %}">Folk</a>
+          <a href="{% url 'app:music' query="jazz" %}">Jazz</a>
+          <a href="{% url 'app:music' query="rap" %}">Rap</a>
+          <a href="{% url 'app:music' query="80s" %}">80s</a>
+          <a href="{% url 'app:music' query="metal" %}">Metal</a>
+          <a href="{% url 'app:music' query="others" %}">Others</a>
+        </div>
+      </div>
+      <div class="book" id="book-disp">
+        <div class="book-nav-more">
+          <a href="{% url 'app:book' query="action" %}">Action</a>
+          <a href="{% url 'app:book' query="adventure" %}">Adventure</a>
+          <a href="{% url 'app:book' query="comedy" %}">Comedy</a>
+          <a href="{% url 'app:book' query="thriller" %}">Thriller</a>
+          <a href="{% url 'app:book' query="romance" %}">Romance</a>
+          <a href="{% url 'app:book' query="drama" %}">Drama</a>
+          <a href="{% url 'app:book' query="crime" %}">Crime</a>
+          <a href="{% url 'app:book' query="horror" %}">Horror</a>
+          <a href="{% url 'app:book' query="classic" %}">Classic</a>
+          <a href="{% url 'app:book' query="mystery" %}">Mystery</a>
+          <a href="{% url 'app:book' query="others" %}">Others</a>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="submenu">
+      <ul class="main-op" id="main-opp">
+        <li>
+          <a href="{% url 'app:list' %}">Movies</a><span class="movie-expand"><img src="{% static 'app/images/dropdown.png' %}" alt=""></span>
+          <ul class="movie-more">
+            <li><a href="{% url 'app:film' query="action" %}">Action</a></li>
+            <li><a href="{% url 'app:film' query="comedy" %}">Comedy</a></li>
+            <li><a href="{% url 'app:film' query="thriller" %}">Thriller</a></li>
+            <li><a href="{% url 'app:film' query="romance" %}">Romance</a></li>
+            <li><a href="{% url 'app:film' query="Drama" %}">Drama</a></li>
+            <li><a href="{% url 'app:film' query="Crime" %}">Crime</a></li>
+            <li><a href="{% url 'app:film' query="Horror" %}">Horror</a></li>
+            <li><a href="{% url 'app:film' query="classic" %}">Classic</a></li>
+            <li><a href="{% url 'app:film' query="mystery" %}">Mystery</a></li>
+            <li><a href="{% url 'app:film' query="adventure" %}">adventure</a></li>
+            <li><a href="{% url 'app:film' query="others" %}">Others</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{% url 'app:musiclist' %}">Music</a><span class="music-expand"><img src="{% static 'app/images/dropdown.png' %}" alt=""></span>
+          <ul class="music-more">
+            <li><a href="{% url 'app:music' query="rock" %}">Rock</a></li>
+            <li><a href="{% url 'app:music' query="pop" %}">Pop</a></li>
+            <li><a href="{% url 'app:music' query="classic" %}">Classic</a></li>
+            <li><a href="{% url 'app:music' query="folk" %}">Folk</a></li>
+            <li><a href="{% url 'app:music' query="jazz" %}">Jazz</a></li>
+            <li><a href="{% url 'app:music' query="rap" %}">Rap</a></li>
+            <li><a href="{% url 'app:music' query="80s" %}">80s</a></li>
+            <li><a href="{% url 'app:music' query="metal" %}">Metal</a></li>
+            <li><a href="{% url 'app:music' query="others" %}">Others</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="{% url 'app:booklist' %}">Books</a><span class="book-expand"><img src="{% static 'app/images/dropdown.png' %}" alt=""></span>
+          <ul class="book-more">
+            <li><a href="{% url 'app:book' query="action" %}">Action</a></li>
+            <li><a href="{% url 'app:book' query="comedy" %}">Comedy</a></li>
+            <li><a href="{% url 'app:book' query="thriller" %}">Thriller</a></li>
+            <li><a href="{% url 'app:book' query="romance" %}">Romance</a></li>
+            <li><a href="{% url 'app:book' query="drama" %}">Drama</a></li>
+            <li><a href="{% url 'app:book' query="crime" %}">Crime</a></li>
+            <li><a href="{% url 'app:book' query="horror" %}">Horror</a></li>
+            <li><a href="{% url 'app:book' query="classic" %}">Classic</a></li>
+            <li><a href="{% url 'app:book' query="mystery" %}">Mystery</a></li>
+            <li><a href="{% url 'app:book' query="others" %}">Others</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <body id="body">
+ 
+    <!-- block content for body -->
+    <!-- ../static/images/poster.jpg -->
+    {% block content %}
+    {% endblock content %}
+    
+  
+
+
+
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="{% static 'app/images/scrolltop.png' %}"  id="scroll"></button>
+    <!-- endblock content -->
+
+    <doc class="doc-bar" id="doc-bar">
+        <div class="doc-stuff-left">
+          {% comment %} {% url "app:clt" %} {% endcomment %}
+        <div id="add-list-butt" class="add-list" title="add a list"><img id="add-list-butt" src="{% static 'app/images/add.png' %}"></div>
+        <div class="user-doc-logo" title="authentication"><img src="{% static 'app/images/user.png' %}"></div>
+        
+        
+
+        <label class="switch"  title="toggle dark/light mode">
+          <input type="checkbox" onclick="save();darkmode(this);" id="dark-switch">
+          <span class="slider round"></span>
+        </label>
+
+      </div>
+        <div class="doc-stuff-center"><a href="{% url 'app:all' %}" title="home"><img src="{% static 'app/images/home.png' %}" id="home"></a></div>
+        <div class="doc-stuff-right">
+          <a href="{% url 'app:chat' %}" title="Chat in the community"><img class="com-chat" src="{% static 'app/images/community.png' %}"></a>
+          <button onClick="javascript:history.go(-1);" title="Go back"><img src="{% static 'app/images/back.png' %}" alt=""></button>
+        </div>
+    </doc>
+    <div class="login-sub-menu" id="login-sub-menu">
+        <ul class="login-sub-menu-options">
+          {% if user.is_authenticated %}
+            <li><a class="username_inlogin">{{user.username}}</a></li><hr>
+            <li><a href="{% url 'app:edit_profile' %}" class="username_inlogin edit">Edit profile</a></li><hr>
+            <li><a href="{% url 'logout' %}">logout<img src="{% static 'app/images/logout.png' %}" class="logout_sub"></a></li>
+          {% else %}
+            <li><a href="{% url 'login' %}">login<img src="{% static 'app/images/logout.png' %}" class="logout_sub login_sub"></a></li><hr>
+            <li><a href="{% url 'register' %}">signup</a></li>
+            <style>
+              .add-list{
+                display: none!important;
+              }
+            </style>
+          {% endif %}
+
+            
+        </ul>
+    </div>
+    
+      {% if user.is_authenticated %}
+      <div class="add-list-sub-menu" id="add-list-sub-menu">
+        <ul class="add-list-sub-menu-options">
+          <li><a href="{% url "app:music_create_list" %}"><img src="{% static 'app/images/music-icon.png' %}"></a></li>
+          <li><a href="{% url "app:create_list" %}"><img src="{% static 'app/images/movie-icon.png' %}"></a></li>
+          <li><a href="{% url "app:book_create_list" %}"><img src="{% static 'app/images/book-icon.png' %}"></a></li>
+        </ul>
+      </div>
+    {% endif %}
+
+    <script src="{% static 'app/js/script.js' %}"></script>
+    <script src="{% static 'app/js/mode-script.js' %}"></script>
+
+
+    <script>
+    let mybutton = document.getElementById("myBtn");
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+    var myscroll = document.getElementById("scroll");
+    var myhome = document.getElementById("home");
+    myscroll.onmouseover = mouseOverscr;
+    myscroll.onmouseout = mouseOutscr;
+    myhome.onmouseover = mouseOverhome;
+    myhome.onmouseout = mouseOuthome;
+
+    function mouseOverscr(){
+      myscroll.src = "{% static 'app/images/scrolltop-hov.png' %}";
+    }
+    function mouseOutscr(){
+      myscroll.src = "{% static 'app/images/scrolltop.png' %}";
+    }
+    function mouseOverhome(){
+      myhome.src = "{% static 'app/images/home-hov.png' %}";
+    }
+    function mouseOuthome(){
+      myhome.src = "{% static 'app/images/home.png' %}";
+    }
+    </script>
+  </body>
+
+</html>

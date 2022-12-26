@@ -1,0 +1,139 @@
+@media only screen and (max-width: 900px) {
+    .nav{
+        height: 40px;
+    }
+    .logo {
+        height: 26px;
+        /* background: url(../static/images/logo-small.svg) no-repeat; */
+        margin: 8px 10px;
+    }
+
+    .menu-btn {
+        display: flex;
+    }
+
+    .submenu {
+        display: block;
+        bottom: -200px;
+    }
+
+    .main-op {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: rgb(0, 109, 94);
+    }
+    .main-op-dark-mode{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: rgb(20, 20, 20);
+    }
+
+    .main-op a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .main-op li {
+        font-size: 20px;
+        list-style: none;
+        margin: 8px auto;
+        color: white;
+    }
+
+    /* .movie-more {
+        background-color: rgb(136, 43, 224);
+        
+    }
+
+    .music-more {
+        background-color: rgb(219, 58, 0);
+    }
+
+    .book-more {
+        background-color: rgb(107, 167, 17);
+    } */
+
+    .movie-more,
+    .music-more,
+    .book-more {
+        display: none;
+    }
+
+    .movie-more a,
+    .music-more a,
+    .book-more a {
+        font-size: 16px;
+        text-align: center;
+        margin: auto;
+        padding: 0 14px;
+    }
+
+    .book-more a:hover {
+        color: cornflowerblue;
+    }
+    .nav-menu-list{
+        display: none;
+    }
+    #myBtn img{
+        height: 30px;
+        width: 30px;
+        bottom: 90px;
+        position: fixed;
+    }
+    .wrap{
+        width: 45%!important;
+    }
+    .poster{
+        display: none;
+    }
+    .fout .foot-options a{
+        font-size: 14px;
+    }
+    .fout .foot-copy small{
+        font-size: 12px;
+    }
+    .section{
+        padding-top: 0;
+    }
+
+
+    /* minify element */
+    .tit{
+        margin-top: 4px!important;
+        margin-bottom: 0px!important;
+    }
+    .thumb img {
+        height: 82px!important;
+        width: auto;
+        border-radius: 1px;
+        margin: 12px;
+      }
+    .Author{
+        display: none;
+    }
+    .Title img{
+        display: none;
+    }
+    .elements{
+        padding-top: 4px!important;
+        padding-bottom: 6px!important;
+        padding-left: 6px!important;
+        padding-right: 4px!important;
+    }
+    .thumb img{
+        margin-top: 2px!important;
+        margin-bottom: 1px!important;
+    }
+    .spoiler img{
+        width: 60px!important;
+    }
+    .Genre{
+        font-size: 14px!important;
+        border-radius: 1px!important;
+    }
+    .star-headline span{
+        font-size: 12px!important;
+    }
+}

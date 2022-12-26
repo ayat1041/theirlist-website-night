@@ -1,0 +1,35 @@
+{% load static %} 
+{% comment %} {% with modam.count as total_comments %}
+
+    
+    {% endwith %} 
+   {% endcomment %}
+  {% with total=object.musicreview_set.all.count %}
+  <div class="commentscarrier">
+    <div class="comment-contentsas comment-head">
+    <p>Comments({{ total }})</p>
+    </div>
+    <hr />
+      {% for i in modam %} {% if i.MusicList.id == musiclist.id %}
+      <div class="comment-contentsas">
+        <p class="commentor-name">
+          {{i.user.username}}
+        </p>
+      </div>
+      <div class="comment-contentsas">
+        <p><small>{{i.created_at}}</small></p>
+      </div>
+      <div class="comment-contentsas"><p>{{i.comment}}</p></div>
+      <div class="comment-contentsas"><p class="reply-com">reply</p></div>
+      <div class="comment-contentsas">
+        <p>
+          <span class="like"><img src="{% static 'app/images/like.png' %}" /></span
+          ><span class="dislike"
+            ><img src="{% static 'app/images/dislike.png' %}"
+          /></span>
+        </p>
+      </div>
+      <hr />
+      {% endif%} {% endfor %}
+  {% endwith %}
+</div>

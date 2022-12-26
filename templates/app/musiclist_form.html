@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block content %}
+   
+<div class="listform" id="listfor">
+    {% if user.is_authenticated %}
+        <div class="title-det">Add a Music List</div>
+        <small class="goodwords">Your contribution to our community is always appreciated</small>
+        <div class="ck-content">
+        <form method="POST">
+            {% csrf_token %}
+            {{form.media}}
+            {{form.as_p}}
+        
+            <button type = "submit">Post</button>
+        </form>
+        </div>
+    {% else %}
+    <div class="title-det">Are you an alien ? :/</div>
+    <small class="goodwords">If not you should login or signup first :)</small>
+    {% endif %}
+
+</div>
+{% endblock content %}

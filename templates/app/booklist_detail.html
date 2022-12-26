@@ -1,0 +1,77 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block content %}
+{% comment %} <link rel="stylesheet" href="../css/list_detail.css"> {% endcomment %}
+
+
+<section class="list_detail" id="list-det-id">
+    <h3>{{booklist.title}}</h3>
+    <div class="detail-up-del">
+        {% if user.id == booklist.creator.id %}
+        <a href="{% url 'app:delete_book' booklist.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+        <a href="{% url 'app:update_booklist' booklist.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+        {% else %}
+        <img src ="{% static 'app/images/delete-dis.png' %}">
+        <img src ="{% static 'app/images/edit-dis.png' %}">
+        {% endif %}
+      </div>
+      <style>
+        .detail-up-del{
+            padding: 10px 25px;
+        }
+        .detail-up-del img{
+          height: 14px;
+        }
+      </style>
+    <small>Author : {{booklist.creator.username}}</small><br>
+    <small>Date : {{booklist.posted}}</small><br>
+    <div class="genre_wrap">
+
+        {% for tag in booklist.genre.all %}
+        <div class="Genre">
+          <a href="{% url 'app:book' query=tag %}">
+            <small>{{ tag }}</small>
+          </a>
+        </div>
+        {% empty %}
+        No tags!
+    {% endfor %}
+    </div> 
+    <div class="blog_post_body">
+        {{booklist.content|safe}}
+    </div>
+    <form class="ratings">
+        
+    </form>
+    <div class="commentss" id="comments-id">
+        
+      <div class = "commentscarrier">
+          
+          {% include "app/booklist_comment.html" %}
+      </div>
+      <div class = "postcommentscarrier">
+          <div><h1>Write your review</h1></div>
+          {% if user.is_authenticated %}
+            <br>
+            {% include 'app/create_bookcomment.html' %}
+          {% else %}
+            <div class="comment-kor-cont">
+                <br>
+                <hr>
+                <br><br>
+                <div class="login-to-comment">Please <a style="color : red;" href="{% url 'login' %}">login</a> to post reviews</div>
+            </div>
+          {% endif %}
+          </div>
+      
+      
+
+
+  </div>   
+  <div class="gap">
+  </div>
+</section>
+
+{% endblock content %}

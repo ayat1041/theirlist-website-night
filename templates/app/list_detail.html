@@ -1,0 +1,182 @@
+{% extends "index.html" %}
+{% load static %}
+
+
+
+{% block content %}
+{% comment %} <link rel="stylesheet" href="../css/list_detail.css"> {% endcomment %}
+
+
+<section class="list_detail" id="list-det-id">
+    <h3>{{list.title}}</h3>
+    <div class="detail-up-del">
+        {% if user.id == list.creator.id %}
+        <a href="{% url 'app:delete_movie' list.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+        <a href="{% url 'app:update_list' list.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+        {% else %}
+        <img src ="{% static 'app/images/delete-dis.png' %}">
+        <img src ="{% static 'app/images/edit-dis.png' %}">
+        {% endif %}
+      </div>
+      <style>
+        .detail-up-del{
+            padding: 10px 25px;
+        }
+        .detail-up-del img{
+          height: 14px;
+        }
+      </style>
+    <small>Author : {{list.creator.username}}</small><br>
+    <small>Date : {{list.posted}}</small><br>
+    <div class="genre_wrap">
+
+        {% for tag in list.genre.all %}
+        <div class="Genre">
+            <a href="{% url 'app:film' query=tag %}">
+                <small>{{ tag }}</small>
+            </a>
+        </div>
+        {% empty %}
+        No tags!
+    {% endfor %}
+    </div> 
+    <div class="blog_post_body">
+        {{list.content|safe}}
+    </div>
+
+    <div class="commentss" id="comments-id">
+        
+            {% include "app/list_comment.html" %}
+            {% comment %} <div class="comment-contentsas"><p class="commentor-name">perky120
+                <span class="stars-comments">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    </span>
+            </p></div>
+            <div class="comment-contentsas"><p><small>26 august 02:23 pm</small></p></div>
+            <div class="comment-contentsas"><p>That was a great suggestion! I guess our taste bud really matches!</p></div>
+            <div class="comment-contentsas"><p class="reply-com">reply</p></div>
+            <div class="comment-contentsas"><p><span class="like"><img src="{% static 'app/images/like.png' %}"></span><span class="dislike"><img src="{% static 'app/images/dislike.png' %}"></span></p></div>
+            <hr>
+            <div class="comment-contentsas"><p class="commentor-name">perky120
+                <span class="stars-comments">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    </span>
+            </p></div>
+            <div class="comment-contentsas"><p><small>26 august 02:23 pm</small></p></div>
+            <div class="comment-contentsas"><p>That was a great suggestion! I guess our taste bud really matches!</p></div>
+            <div class="comment-contentsas"><p class="reply-com">reply</p></div>
+            <div class="comment-contentsas"><p><span class="like"><img src="{% static 'app/images/like.png' %}"></span><span class="dislike"><img src="{% static 'app/images/dislike.png' %}"></span></p></div>
+            <hr>
+            {% endcomment %}
+        </div>
+        <div class = "postcommentscarrier">
+            <div><h1>Write your review</h1></div>
+            {% if user.is_authenticated %}
+                <br>
+                {% include 'app/create_comment.html' %}
+                <br>
+                {% include 'app/create_starr.html' %}
+            {% else %}
+            <div class="comment-kor-cont">
+                <br>
+                <hr>
+                <br><br>
+                <div class="login-to-comment">Please <a style="color : red;" href="{% url 'login' %}">login</a> to post reviews</div>
+            </div>
+            {% endif %}
+            {% comment %} {% include 'app/create_comment.html' with form=ReviewForm %} {% endcomment %}
+            {% comment %} <div><textarea  name="post-a-review" rows="14" cols="70"></textarea></div>
+            <div><p>Your rating</p></div>
+            <div>
+                <span class="stars-post-comments">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    </span>
+            </div><br>
+            <div><button type="submit">Post</button></div> {% endcomment %}
+        </div>
+    </div>   
+    <div class="gap">
+    </div> 
+</section>
+<style>
+    {% comment %} .slider-cont{
+        position: fixed;
+        
+    } {% endcomment %}
+    .slide-arrow{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: fixed;
+        right: 0px;
+        bottom: 60%;
+        width: max-content;
+        height: max-content;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+        background-color: #6dab80;
+        cursor: pointer;
+    }
+    .slide-arrow h4{
+        padding-right: 6px;
+        margin-left: -8px;
+        font-weight: 900;
+        color: #2b3927;
+    }
+    .slide-arrow .first{
+        margin-right: -24px;
+    }
+    .slide-menu{
+        position: fixed;
+        right: -300px;
+        bottom: 94px;
+        width: 300px;
+        height: 90vh;
+        background-color: #6dab80;
+    }
+    .slide-menu .close{
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 300px;
+        background-color: red;
+        position: fixed;
+        bottom: 100px;
+        transition : all 350ms ease-in;
+    }
+    .slide-menu .close:hover{
+        background-color: #a1000090;
+    }
+    .slide-menu .close h4{
+        color: white;
+    }
+</style>
+<div class="slider-cont">
+<div class="slide-arrow" id="related-arrow-btn">
+    <img class= "first" src="{% static 'app/images/open-related.png' %}">
+    <img src="{% static 'app/images/open-related.png' %}">
+    <h4>Related</h4>
+</div>
+<div class="slide-menu" id="related-slide-menu">
+    <div class="close" id="related-close-btn">
+        <h4> Hide </h4>
+    </div>
+</div>
+</div>
+
+{% endblock content %}

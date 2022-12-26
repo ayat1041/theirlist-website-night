@@ -1,0 +1,75 @@
+{% extends "index.html" %} 
+{% load static %} 
+{% block content %}
+
+<section>
+  <div class="contain-sec" id="contain-sec8">
+    {% for lola in object_list %}
+    <div class="elements">
+      <div class="thumb">
+        <img src="{% static 'app/images/movie-poster.jpg' %}" width="100px" />
+      </div>
+      {% if lola.spoiler == True %}
+          <div class="spoiler"><img src="{% static 'app/images/spoilerr.png' %}" width="100px" /></div>
+      {% endif %}
+      <div class="Title">
+        {% comment %} <a href="{{lola.id}}/"><h4 class="tit">{{lola.title}}</h4></a> {% endcomment %}
+        <a href="{{lola.slug}}/"><h4 class="tit">{{lola.title}}</h4></a>
+        {% if user.id == lola.creator.id %}
+        <a href="{% url 'app:delete_movie' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+        <a href="{% url 'app:update_list' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+        {% else %}
+        <img src ="{% static 'app/images/delete-dis.png' %}">
+        <img src ="{% static 'app/images/edit-dis.png' %}">
+        {% endif %}
+      </div>
+      <style>
+        .Title img{
+          height: 14px;
+        }
+      </style>
+      <div class="Author">
+        <small>Author : {{lola.creator.username}}<span>{{lola.posted|date:"SHORT_DATE_FORMAT"}}</span></small>
+      </div>
+      <div class="rating">
+        <span class="star-headline">
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        </span>
+      </div>
+      
+        {% for tag in lola.genre.all %}
+        <div class="Genre">
+          <a href="{% url 'app:film' query=tag %}">
+        <small>{{ tag }}</small>
+          </a>
+        </div>
+          {% empty %} 
+          No tags! 
+        {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="pagination_pages">
+    <span class="step-links">
+        <span class="current">
+        {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,269 @@
+{% extends "index.html" %} {% load static %} {% block content %}
+<style>
+  .about_us {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+    width: 100vw;
+    max-width: 100%;
+    {% comment %} background-color: red; {% endcomment %}
+    padding: 80px 14vw;
+    padding-top: 60px;
+  }
+  .edit_prof{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    {% comment %} justify-content: center; {% endcomment %}
+    align-items: flex-start;
+    height: max-content;
+    width: 100vw;
+    max-width: 100%;
+    {% comment %} background-color: #0099cc20; {% endcomment %}
+    padding: 0 0;
+    padding-top: 0px;
+  }
+
+  @keyframes slideIn{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+  }
+  @keyframes slideInrev{
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+  }
+  .edit_prof .sidebar{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: max-content;
+    width: 100vw;
+    max-width: 100%;
+    {% comment %} background-color: rgb(20, 20, 20); {% endcomment %}
+    background-color: rgb(0, 109, 94);
+    position: relative;
+  }
+  .sidebar .profile-image{
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    margin: 8px 0;
+    {% comment %} background-color: red; {% endcomment %}
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .sidebar .profile-image img{
+    align-self: center;
+    margin: 0 28px;   
+    height: 86px;
+    width: 86px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 150ms ease-in-out;
+    border: 2px solid greenyellow;
+  }
+  .sidebar .profile-image img:hover{
+    border: 1px solid #D1000030;
+
+  }
+  .sidebar .options{
+    align-self: center;
+    width: 72vw;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    position: relative;
+    bottom: -32px;
+  }
+  .options .edit-prof-options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: grey;
+    cursor: pointer;
+    transition: 500ms all ease-in;
+  }
+  .options .edit-prof-options:hover{
+    color: white;
+  }
+  .options .edit-prof-options div a{
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .sidebar .options a{
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;
+    color: white;
+    transition: all 250ms ease-in-out;
+  }
+  .sidebar .options a:hover{
+    color: #AADB1E;
+  }
+  .user_set_name{
+    margin: 3px;
+    font-size: 16px;
+    font-family: cursive;
+    font-weight: 800;
+    color: bisque;
+  }
+
+  {% comment %} big-menu-user-sett {% endcomment %}
+
+  .about_us h1 {
+    color: white;
+    font-weight: 100;
+  }
+  .about_us_img img {
+    height: 20vw;
+  }
+  .about_us_cont{
+    font-size: 8px;
+  }
+  .editdoc-prof{
+    display: none;
+  }
+  @media only screen and (max-width: 900px) {
+    .edit_prof .sidebar{
+      display: none;
+    }
+    .edit_prof .title{
+      width: 100vw;
+    }
+    .editdoc-prof{
+      animation: 300ms ease-in-out 0s 1 slideup;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      width: 100%;
+      height: 36px;
+      position: fixed;
+      background: rgb(0, 109, 94);
+      bottom: 38px;
+      z-index: 11;
+    }
+    .editdoc-prof .icons img{
+        height: 20px;
+        margin-top: 6px;
+    }
+  }
+</style>
+{% comment %} <div class="about_us">
+  <div class="about_us_img">
+    <img src="{% static 'app/images/logo_no_motto.svg' %}" />
+  </div>
+  <div class="about_us_cont">
+    <h1>
+      Theirlist is a website where you get suggesitions of Movie, Book, Music as
+      lists.<br />
+      How to know if they are followable? Just check the ratings if the other
+      users liked it enough or not.
+      <br /><br />
+      Here is all the features we have for you _<br /><br />
+      <ul>
+        <li>
+          <p>
+            Create/Delete/Update the list of your own (requires signing up).
+          </p>
+        </li>
+        <li><p>Add/view list in 3 separate categories.</p></li>
+        <li><p>Every categories as their own genre sets.</p></li>
+        <li>
+          <p>
+            To keep the quality pure we use rating systems. So rate lists and
+            check others lists rating reviews.
+          </p>
+        </li>
+        <li><p>Write a review (comments)</p></li>
+        <li><p>Search!</p></li>
+        <li>
+          <p>Chat with other users regarding any movies, books, music.</p>
+        </li>
+        <li><p>User profile.</p></li>
+      </ul>
+    </h1>
+  </div>
+</div> {% endcomment %}
+<div class="edit_prof">
+    <div class = "sidebar">
+        <div class="profile-image"><img src="{{ user.profile.profile_pic.url }}"><a class="user_set_name">//{{user.username}}</a></div>
+        <div class="options">
+            <div class="edit-prof-options">
+              <div>
+                <a href="{% url 'app:edit_profile' %}"><img src="{% static 'app/images/edit-prof-profile.png' %}"></a>
+              </div>
+              <div>
+                <a>General</a>
+              </div>
+              </div>
+            <div class="edit-prof-options">
+              <div>
+              <a href="{% url 'app:userposts' %}"><img src="{% static 'app/images/edit-prof-post.png' %}"></a>
+              </div>
+              <div>
+                <a>Posts</a>
+              </div>
+            </div>
+            <div class="edit-prof-options">
+              <div>
+                <a href="{% url 'app:UserComments' %}"><img src="{% static 'app/images/edit-prof-comment.png' %}"></a>
+                </div>
+                <div>
+                  <a>Comments</a>
+                </div>
+                </div>
+            <div class="edit-prof-options">
+              <div>
+                <a href=""><img src="{% static 'app/images/edit-prof-rate.png' %}"></a>
+                </div>
+                <div>
+                  <a>Rating</a>
+                </div>
+                </div>
+            <div class="edit-prof-options">
+              <div>
+              <a href=""><img src="{% static 'app/images/edit-prof-follow.png' %}"></a>
+              </div>
+              <div>
+                <a>Followings</a>
+              </div>
+            </div>
+            <div class="edit-prof-options">
+              <div class="edit-prof-options"><div>
+                <a href=""><img src="{% static 'app/images/edit-prof-settings.png' %}"></a>
+                </div>
+                <div>
+                  <a>Settings</a>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    {% block profile %}
+    {% endblock %}
+    </div>
+</div>
+<div class="editdoc-prof">
+  <div class="icons"><a href="{% url 'app:edit_profile' %}"><img src="{% static 'app/images/edit-prof-profile.png' %}"></a></div>
+  <div class="icons"><a href="{% url 'app:userposts' %}"><img src="{% static 'app/images/edit-prof-post.png' %}"></a></div>
+  <div class="icons"><a href="{% url 'app:UserComments' %}"><img src="{% static 'app/images/edit-prof-comment.png' %}"></a></div>
+  <div class="icons"><a href=""><img src="{% static 'app/images/edit-prof-rate.png' %}"></a></div>
+  <div class="icons"><a href=""><img src="{% static 'app/images/edit-prof-follow.png' %}"></a></div>
+  <div class="icons"><a href=""><img src="{% static 'app/images/edit-prof-settings.png' %}"></a></div>
+</div>
+{% endblock content %}

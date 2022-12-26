@@ -1,0 +1,43 @@
+<style>
+.starr_cont .starr select{
+    display: none;
+}
+.starr_cont .starr p input{
+    display: none;
+}
+.starr_cont .starr button{
+    margin-top: 28px;
+    background-color: Dodgerblue;
+    padding: 2px 4px;
+}
+</style>
+
+<div class="starr_cont">
+<form class = "starr" method="POST" action="{% url 'app:create_starr' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>
+        <select name="user" required="" id="id_user">
+            <option value="{{user.pk}}" selected="">{{user.username}}</option>
+          </select>
+    </p>
+    <p>
+        <select name="list" required="" id="id_List">
+            <option value="{{list.pk}}" selected="">{{list.title}}</option>
+          </select>
+    </p>
+    <div class="comment-stars">
+        <span class="stars-post-comments">
+            <span class="fa fa-star" id="st1"></span>
+            <span class="fa fa-star" id="st2"></span>
+            <span class="fa fa-star" id="st3"></span>
+            <span class="fa fa-star" id="st4"></span>
+            <span class="fa fa-star" id="st5"></span>
+            </span>
+    </div>
+    <p>
+    <input type="number" name="rate" value="0" required="" id="id_rate" placeholder="Rating">
+    </p>
+<div><button type="submit">Rate</button></div>
+</form>
+</div>
+    

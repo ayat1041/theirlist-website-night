@@ -1,0 +1,168 @@
+{% extends "app/edit_prof_base.html" %} 
+{% load static %} 
+{% block profile %}
+
+<style>
+    .title .contain-sec{
+        padding-top: 0;
+        margin-bottom: 0;
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+    }
+    .title{
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: max-content;
+        margin-bottom: 120px;
+        width: 100vw;
+        max-width: 100%;
+    }
+    .title .contain-sec .elements{
+       padding-bottom: 24px;
+    }
+</style>
+<div class="title">
+    <div class="contain-sec movie-contain main-sec" id="contain-sec">
+        {% for lola in allPosts %}
+        {% if lola.creator.id == user.id %}
+        <div class="elements">
+          <div class="thumb">
+            <img src="{% static 'app/images/movie-poster.jpg' %}" width="100px" />
+          </div>
+          <div class="Title">
+            <a href="{% url 'app:list_detail' lola.slug %}"><h4 class="tit">{{lola.title}}</h4></a>
+            {% if user.id == lola.creator.id %}
+            <a href="{% url 'app:delete_movie' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+            <a href="{% url 'app:update_list' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+            {% else %}
+            <img src ="{% static 'app/images/delete-dis.png' %}">
+            <img src ="{% static 'app/images/edit-dis.png' %}">
+            {% endif %}
+          </div>
+          <style>
+            .Title img{
+              height: 14px;
+            }
+          </style>
+          <div class="Author">
+            <small>Author : {{lola.creator.username}}<span>{{lola.posted}}</span></small>
+          </div>
+          <div class="rating">
+            <span class="star-headline">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            </span>
+          </div>
+          
+            {% for tag in lola.genre.all %}
+            <div class="Genre">
+              <a href="{% url 'app:film' query=tag %}">
+                <small>{{ tag }}</small>
+              </a>
+            </div>
+              {% empty %} 
+              No tags! 
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% for lola in allPostsmusic %}
+        {% if lola.creator.id == user.id %}
+        <div class="elements">
+          <div class="thumb">
+            <img src="{% static 'app/images/music-poster.jpg' %}" width="100px" />
+          </div>
+          <div class="Title">
+            <a href="{% url 'app:musiclist_detail' lola.slug %}"><h4 class="tit">{{lola.title}}</h4></a>
+            {% if user.id == lola.creator.id %}
+            <a href="{% url 'app:delete_music' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+            <a href="{% url 'app:update_musiclist' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+            {% else %}
+            <img src ="{% static 'app/images/delete-dis.png' %}">
+            <img src ="{% static 'app/images/edit-dis.png' %}">
+            {% endif %}
+          </div>
+          <style>
+            .Title img{
+              height: 14px;
+            }
+          </style>
+          <div class="Author">
+            <small>Author : {{lola.creator.username}}<span>{{lola.posted}}</span></small>
+          </div>
+          <div class="rating">
+            <span class="star-headline">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            </span>
+          </div>
+          
+            {% for tag in lola.genre.all %}
+            <div class="Genre">
+              <a href="{% url 'app:music' query=tag %}">
+                <small>{{ tag }}</small>
+              </a>
+            </div>
+              {% empty %} 
+              No tags! 
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% for lola in allPostsbook %}
+        {% if lola.creator.id == user.id %}
+        <div class="elements">
+          <div class="thumb">
+            <img src="{% static 'app/images/book-poster.jpg' %}" width="100px" />
+          </div>
+          <div class="Title">
+            <a href="{% url 'app:booklist_detail' lola.slug %}"><h4 class="tit">{{lola.title}}</h4></a>
+            {% if user.id == lola.creator.id %}
+            <a href="{% url 'app:delete_book' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+            <a href="{% url 'app:update_booklist' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+            {% else %}
+            <img src ="{% static 'app/images/delete-dis.png' %}">
+            <img src ="{% static 'app/images/edit-dis.png' %}">
+            {% endif %}
+          </div>
+          <style>
+            .Title img{
+              height: 14px;
+            }
+          </style>
+          <div class="Author">
+            <small>Author : {{lola.creator.username}}<span>{{lola.posted}}</span></small>
+          </div>
+          <div class="rating">
+            <span class="star-headline">
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            <span class="fa fa-star"></span>
+            </span>
+          </div>
+          
+            {% for tag in lola.genre.all %}
+            <div class="Genre">
+              <a href="{% url 'app:book' query=tag %}">
+                <small>{{ tag }}</small>
+              </a>
+            </div>
+              {% empty %} 
+              No tags! 
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
+      
+</div>
+{% endblock %}

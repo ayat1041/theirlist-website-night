@@ -1,0 +1,483 @@
+{% extends "index.html" %} 
+{% load static %} 
+{% block content %}
+<style>
+    .movie-contain{
+        margin-bottom: 0px;
+        padding-top: 0px;
+    }
+    .book-contain{
+        padding-top: 0px;
+        margin-bottom: 50px;
+    }
+    .music-contain{
+        padding-top: 0px;
+        margin-bottom: 0px;
+    }
+    .headline{
+        display: flex;
+        justify-content: center;
+        background-color: red;
+        padding: 4px 4px;
+        margin: 4px 0px;
+        text-align: center;
+        height: max-content!important;
+        font-weight: lighter;
+        box-shadow: 0px 2px 2px #00000090;
+    }
+    
+    .minimize img{
+        height: 28px;
+        position: absolute;
+        right: 6px;
+        cursor: pointer;
+    }
+    .headline-topo{
+      background-color: #48bf91;
+    }
+    .headline-topo-dark-mode{
+      background-color: #48bf9190;
+    }
+    .headline-top{
+        background-color: #FFEA04;
+    }
+    .headline-top-dark-mode{
+      background-color: #FFEA0490;
+    }
+    .headline-middle{
+        background-color: #FF4500;
+    }
+    .headline-middle-dark-mode{
+      background-color: #FF450090;
+    }
+    .headline-bottom{
+        background-color: #AADB1E;
+    }
+    .headline-bottom-dark-mode{
+      background-color: #AADB1E90;
+  }
+    
+    .headline-all{
+        color: white;
+        font-weight: 100;
+    }
+    .headline-topo h1{
+      color: black;
+    }
+    .headline-top h1{
+      color: black;
+    }
+    .headline-middle h1{
+      color: black;
+    }
+    .headline-bottom h1{
+      color: black;
+    }
+    .main-sec{
+      display: grid;
+    }
+    .main-sec2{
+      display: grid;
+    }
+    .main-sec3{
+      display: grid;
+    }
+    @media only screen and (max-width: 900px) {
+      .movie-contain{
+        margin-bottom: 0px;
+        padding-top: 0px;
+    }
+    }
+</style>
+
+{% comment %} <div id="preloader"></div> {% endcomment %}
+<div class = "poster"><img src="{% static 'app/images/poster_light.jpg' %}" alt="" id="poster"></div>
+<section>
+  
+  {% comment %} {% include "app/madeforu.html" %} {% endcomment %}
+
+  {% if user.is_authenticated %}
+    <div class="headline headline-topo" id="headlline-topo"><div class="head-cont-all" ><h1 class="headline-all">Made for you</h1></div><span class="minimize" id="toptopmini"><img src="{% static 'app/images/minimize.png' %}" id="topminiimg" alt=""></span></div>
+      <div class="contain-sec movie-contain main-sec" id="contain-seco">
+        {% for lola in madefmovies %}
+          <div class="elements">
+            <div class="thumb">
+              <img src="{% static 'app/images/movie-poster.jpg' %}" width="100px" />
+            </div>
+            {% if lola.spoiler == True %}
+            <div class="spoiler"><img src="{% static 'app/images/spoilerr.png' %}" width="100px" /></div>
+            {% endif %}
+            <div class="Title">
+              <a href="{% url 'app:list_detail' lola.slug %}"><h4 class="tit" id="tit">{{lola.title}}</h4></a>
+              {% if user.id == lola.creator.id %}
+              <a href="{% url 'app:delete_movie' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+              <a href="{% url 'app:update_list' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+              {% else %}
+              <img src ="{% static 'app/images/delete-dis.png' %}">
+              <img src ="{% static 'app/images/edit-dis.png' %}">
+              {% endif %}
+            </div>
+            <style>
+              .Title img{
+                height: 14px;
+              }
+            </style>
+            <div class="Author">
+              <small>Author : {{lola.creator.username}}<span>{{lola.posted|date:"SHORT_DATE_FORMAT"}}</span></small>
+            </div>
+            <div class="rating">
+              <span class="star-headline">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              </span>
+            </div>
+            
+              {% for tag in lola.genre.all %}
+              <div class="Genre">
+                <a href="{% url 'app:film' query=tag %}">
+                  <small>{{ tag }}</small>
+                </a>
+              </div>
+                {% empty %} 
+                No tags! 
+              {% endfor %}
+          </div>
+          {% endfor %}
+          {% for lola in madefmusic %}
+          <div class="elements">
+            <div class="thumb">
+              <img src="{% static 'app/images/music-poster.jpg' %}" width="100px" />
+            </div>
+            {% if lola.spoiler == True %}
+            <div class="spoiler"><img src="{% static 'app/images/spoilerr.png' %}" width="100px" /></div>
+            {% endif %}
+            <div class="Title">
+              <a href="{% url 'app:musiclist_detail' lola.slug %}"><h4 class="tit" id="tit">{{lola.title}}</h4></a>
+              {% if user.id == lola.creator.id %}
+              <a href="{% url 'app:delete_music' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+              <a href="{% url 'app:update_musiclist' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+              {% else %}
+              <img src ="{% static 'app/images/delete-dis.png' %}">
+              <img src ="{% static 'app/images/edit-dis.png' %}">
+              {% endif %}
+            </div>
+            <style>
+              .Title img{
+                height: 14px;
+              }
+            </style>
+            <div class="Author">
+              <small>Author : {{lola.creator.username}}<span>{{lola.posted|date:"SHORT_DATE_FORMAT"}}</span></small>
+            </div>
+            <div class="rating">
+              <span class="star-headline">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              </span>
+            </div>
+            
+              {% for tag in lola.genre.all %}
+              <div class="Genre">
+                <a href="{% url 'app:music' query=tag %}">
+                  <small>{{ tag }}</small>
+                </a>
+              </div>
+                {% empty %} 
+                No tags! 
+              {% endfor %}
+          </div>
+          {% endfor %}
+          {% for lola in madefbooks %}
+          <div class="elements">
+            <div class="thumb">
+              <img src="{% static 'app/images/book-poster.jpg' %}" width="100px" />
+            </div>
+            {% if lola.spoiler == True %}
+            <div class="spoiler"><img src="{% static 'app/images/spoilerr.png' %}" width="100px" /></div>
+            {% endif %}
+            <div class="Title">
+              <a href="{% url 'app:booklist_detail' lola.slug %}"><h4 class="tit" id="tit">{{lola.title}}</h4></a>
+              {% if user.id == lola.creator.id %}
+              <a href="{% url 'app:delete_book' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+              <a href="{% url 'app:update_booklist' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+              {% else %}
+              <img src ="{% static 'app/images/delete-dis.png' %}">
+              <img src ="{% static 'app/images/edit-dis.png' %}">
+              {% endif %}
+            </div>
+            <style>
+              .Title img{
+                height: 14px;
+              }
+            </style>
+            <div class="Author">
+              <small>Author : {{lola.creator.username}}<span>{{lola.posted|date:"SHORT_DATE_FORMAT"}}</span></small>
+            </div>
+            <div class="rating">
+              <span class="star-headline">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              <span class="fa fa-star"></span>
+              </span>
+            </div>
+            
+              {% for tag in lola.genre.all %}
+              <div class="Genre">
+                <a href="{% url 'app:book' query=tag %}">
+                  <small>{{ tag }}</small>
+                </a>
+              </div>
+                {% empty %} 
+                No tags! 
+              {% endfor %}
+          </div>
+          {% endfor %}
+
+    {% comment %} end of made for u {% endcomment %}
+  </div>
+    
+  {% endif %}
+
+
+  <div class="headline headline-top" id="headlline-top"><div class="head-cont-all" ><h1 class="headline-all">Movie & series</h1></div><span class="minimize" id="topmini"><img src="{% static 'app/images/minimize.png' %}" id="miniimg" alt=""></span></div>
+  <div class="contain-sec movie-contain main-sec" id="contain-sec">
+    {% for lola in allPosts %}
+    <div class="elements">
+      <div class="thumb">
+        <img src="{% static 'app/images/movie-poster.jpg' %}" width="100px" />
+      </div>
+      {% if lola.spoiler == True %}
+      <div class="spoiler"><img src="{% static 'app/images/spoilerr.png' %}" width="100px" /></div>
+      {% endif %}
+      <div class="Title">
+        <a href="{% url 'app:list_detail' lola.slug %}"><h4 class="tit" id="tit">{{lola.title}}</h4></a>
+        {% if user.id == lola.creator.id %}
+        <a href="{% url 'app:delete_movie' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+        <a href="{% url 'app:update_list' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+        {% else %}
+        <img src ="{% static 'app/images/delete-dis.png' %}">
+        <img src ="{% static 'app/images/edit-dis.png' %}">
+        {% endif %}
+      </div>
+      <style>
+        .Title img{
+          height: 14px;
+        }
+      </style>
+      <div class="Author">
+        <small>Author : {{lola.creator.username}}<span>{{lola.posted|date:"SHORT_DATE_FORMAT"}}</span></small>
+      </div>
+      <div class="rating">
+        <span class="star-headline">
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        </span>
+      </div>
+      
+        {% for tag in lola.genre.all %}
+        <div class="Genre">
+          <a href="{% url 'app:film' query=tag %}">
+            <small>{{ tag }}</small>
+          </a>
+        </div>
+          {% empty %} 
+          No tags! 
+        {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="headline headline-middle" id="headline-middle"><div class="head-cont-all" ><h1 class="headline-all">Music</h1></div><span class="minimize" id="centmini"><img src="{% static 'app/images/minimize.png' %}" id="miniimg2" alt=""></span></div>
+  <div class="contain-sec music-contain main-sec2" id="contain-sec2">
+    {% for lola in allPostsmusic %}
+    <div class="elements">
+      <div class="thumb">
+        <img src="{% static 'app/images/music-poster.jpg' %}" width="100px" />
+      </div>
+      <div class="Title">
+        <a href="{% url 'app:musiclist_detail' lola.slug %}"><h4 class="tit">{{lola.title}}</h4></a>
+        {% if user.id == lola.creator.id %}
+        <a href="{% url 'app:delete_music' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+        <a href="{% url 'app:update_musiclist' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+        {% else %}
+        <img src ="{% static 'app/images/delete-dis.png' %}">
+        <img src ="{% static 'app/images/edit-dis.png' %}">
+        {% endif %}
+      </div>
+      <style>
+        .Title img{
+          height: 14px;
+        }
+      </style>
+      <div class="Author">
+        <small>Author : {{lola.creator.username}}<span>{{lola.posted|date:"SHORT_DATE_FORMAT"}}</span></small>
+      </div>
+      <div class="rating">
+        <span class="star-headline">
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        </span>
+      </div>
+      {% comment %} <div class="rating">
+        <span class="stars-comments">
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        </span>  
+      </div> {% endcomment %}
+        {% for tag in lola.genre.all %}
+        <div class="Genre">
+          <a href="{% url 'app:music' query=tag %}">
+            <small>{{ tag }}</small>
+          </a>
+        </div>
+          {% empty %} 
+          No tags! 
+        {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  <div class="headline headline-bottom" id="headline-bottom"><div class="head-cont-all" ><h1 class="headline-all">Book</h1></div><span class="minimize" id="bottommini"><img src="{% static 'app/images/minimize.png' %}" id="miniimg3" alt=""></span></div>
+  <div class="contain-sec book-contain main-sec3" id="contain-sec3">
+    {% for lola in allPostsbook %}
+    <div class="elements">
+      <div class="thumb">
+        <img src="{% static 'app/images/book-poster.jpg' %}" width="100px" />
+      </div>
+      {% if lola.spoiler == True %}
+      <div class="spoiler"><img src="{% static 'app/images/spoilerr.png' %}" width="100px" /></div>
+      {% endif %}
+      <div class="Title">
+        <a href="{% url 'app:booklist_detail' lola.slug %}"><h4 class="tit">{{lola.title}}</h4></a>
+        {% if user.id == lola.creator.id %}
+        <a href="{% url 'app:delete_book' lola.slug %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+        <a href="{% url 'app:update_booklist' lola.slug %}"><img src ="{% static 'app/images/edit.png' %}"></a>
+        {% else %}
+        <img src ="{% static 'app/images/delete-dis.png' %}">
+        <img src ="{% static 'app/images/edit-dis.png' %}">
+        {% endif %}
+      </div>
+      <style>
+        .Title img{
+          height: 14px;
+        }
+      </style>
+      <div class="Author">
+        <small>Author : {{lola.creator.username}}<span>{{lola.posted|date:"SHORT_DATE_FORMAT"}}</span></small>
+      </div>
+      <div class="rating">
+        <span class="star-headline">
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span>
+        </span>
+      </div>
+        {% for tag in lola.genre.all %}
+        <div class="Genre">
+          <a href="{% url 'app:book' query=tag %}">
+            <small>{{ tag }}</small>
+          </a>
+        </div>
+          {% empty %} 
+          No tags! 
+        {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+  
+  
+</section>
+<footer class="fout" id = "fout">
+  <div class="foot-options">
+  <a href="{% url "app:about_us" %}">About us</a>
+  <a href="{% url "app:feedback" %}">Feedback</a>
+  <a href="{% url "app:guidelines" %}">Guidelines</a>
+  </div>
+  <div class="foot-copy">
+  <small>Copyright &copy; HornetHive 2022</small>
+  </div>
+</footer>
+<script>
+  let topo = document.getElementById("topmini");
+  let topoo = document.getElementById("toptopmini");
+  let center = document.getElementById("centmini");
+  let bottom = document.getElementById("bottommini");
+  let topconto = document.getElementById("contain-seco");
+  let topcont = document.getElementById("contain-sec");
+  let centcont = document.getElementById("contain-sec2");
+  let botcont = document.getElementById("contain-sec3");
+  let miniimgg = document.getElementById("topminiimg");
+  let miniimg = document.getElementById("miniimg");
+  let miniimg2 = document.getElementById("miniimg2");
+  let miniimg3 = document.getElementById("miniimg3");
+  let hint1 = false, hint2 = false, hint3 = false, hint0 = false;
+
+  topoo?.addEventListener('click', () =>{
+    if(!hint0){
+      topconto.style.display = "none";
+      miniimgg.src = "{% static 'app/images/maximize.png' %}";
+      hint0 = true;
+    }
+    else{
+      topconto.style.display = "grid";
+      miniimgg.src = "{% static 'app/images/minimize.png' %}";
+      hint0 = false;
+    }
+  });
+
+  topo.addEventListener('click', () =>{
+    if(!hint1){
+      topcont.style.display = "none";
+      miniimg.src = "{% static 'app/images/maximize.png' %}";
+      hint1 = true;
+    }
+    else{
+      topcont.style.display = "grid";
+      miniimg.src = "{% static 'app/images/minimize.png' %}";
+      hint1 = false;
+    }
+  });
+  center.addEventListener('click', () =>{
+    if(!hint2){
+      centcont.style.display = "none";
+      miniimg2.src = "{% static 'app/images/maximize.png' %}";
+      hint2 = true;
+    }
+    else{
+      centcont.style.display = "grid";
+      miniimg2.src = "{% static 'app/images/minimize.png' %}";
+      hint2 = false;
+    }
+  });
+  bottom.addEventListener('click', () =>{
+    if(!hint3){
+      botcont.style.display = "none";
+      miniimg3.src = "{% static 'app/images/maximize.png' %}";
+      hint3 = true;
+    }
+    else{
+      botcont.style.display = "grid";
+      miniimg3.src = "{% static 'app/images/minimize.png' %}";
+      hint3 = false;
+    }
+  });
+
+</script>
+{% endblock content %}

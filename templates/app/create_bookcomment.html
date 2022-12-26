@@ -1,0 +1,63 @@
+
+<style>
+    .comment-form-cont{
+        background: red;
+        height: 100vh;
+        width: 100vw;
+    }
+    .create_comme{
+        display: flex;
+        flex-wrap: wrap;
+        height: 500px;
+        {% comment %} background-color: red; {% endcomment %}
+        width: 500px;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        position: relative;
+    }
+    .create_comme label,.create_comme textarea,.create_comme input, .create_comme select{
+        margin: 12px;
+    }
+    .create_comme form textarea{
+        display: absolute;
+        right: 0;
+    }
+    .create_comme form input{
+        display: absolute;
+        right: 0;
+    }
+    .comment-kor select{
+        display: none;
+    }
+    .comment-kor .comment-stars{
+        padding: 18px 0px;
+        cursor: pointer;
+    }
+    .comment-kor input{
+        display: none;
+    }
+</style>
+
+
+<div class="comment-kor-cont">
+    <form class = "comment-kor" method="POST" action="{% url 'app:create_bookcomment' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+    <p>
+        {% comment %} <label for="id_user">User:</label> {% endcomment %}
+        <select name="user" required="" id="id_user">
+            <option value="{{user.pk}}" selected=""></option>
+          </select>
+    </p>
+    <p>
+        <select name="BookList" required="" id="id_List">
+            <option value="{{booklist.pk}}" selected=""></option>
+          </select>
+    </p>
+    <p>
+        <textarea name="comment" cols="40" rows="10" maxlength="250" required="" id="id_comment" placeholder="comment"></textarea>
+    </p>
+    <div><button type="submit">Post</button></div>
+    </form>
+    </div>

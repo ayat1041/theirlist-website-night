@@ -1,0 +1,84 @@
+{% extends "index.html" %}
+{% block content %}
+
+<style>
+    .listform{
+        display: flex;
+        flex-wrap: wrap;
+        color: white;
+        flex-direction: column;
+        padding: 60px 4%;
+        align-items: center;
+        {% comment %} background-color: blueviolet; {% endcomment %}
+    }
+    .ck-content{
+        width: 80vw;
+        
+    }
+    .listform button{
+        padding: 4px 12px;
+        position: relative;
+        border: none;
+        outline: none;
+        background-color: var(--rd);
+        margin: 8px 0;
+        font-size: 1rem;
+        color: white;
+        border-radius: 2px;
+        width: 80px;
+        transition: all 100ms ease-in-out;
+    }
+    .listform button:hover{
+        background-color: #121212;
+    }
+    .listform .title-det{
+        font-size: 2rem;
+        padding: 4px 0;
+    }
+    .listform .goodwords{
+        font-size: 16px;
+        padding: 4px 0;
+        margin: 8px 0;
+        margin-bottom: 14px;
+    }
+    @media only screen and (max-width: 900px) {
+        .listform .goodwords{
+            font-size: 10px;
+        }
+    }
+    .listform input{
+        width: 100%;
+        margin: 8px 0;
+        padding: 4px 0;
+        border: 1px solid rgba(255, 101, 47, .2);
+        border-radius: 2px;
+        outline: 0;
+        border-radius: 2px;
+        color: white;
+        background-color: #121212!important;
+    }
+    .listform select{
+        width: 100%;
+        padding: 4px 12px;
+        margin: 8px 0;
+        color: white;
+        background-color: #121212;
+        border-radius: 2px;
+        border: 1px solid rgba(255, 101, 47, .2);
+    }
+    
+</style>    
+<div class="listform">
+<div class="title-det">Join now</div>
+<small class="goodwords">Trust me.. You wont regret!</small>
+<div class="ck-content">
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button type = "submit">join</button>
+</form>
+</div>
+<div class="facebook-login"><a href="{% url 'social:begin' 'facebook' %}">Login using facebook</a></div>
+</div>
+{% endblock content %}

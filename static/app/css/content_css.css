@@ -1,0 +1,142 @@
+section {
+  position: relative;
+  z-index: 0;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
+.contain-sec {
+  padding-top: 0px;
+  display: grid;
+  width: 100%;
+  color: black;
+  grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  position: relative;
+  margin-bottom: 100px;
+}
+.contain-sec-dark-mode{
+  color: white!important;
+}
+
+.elements {
+  /* height: 200px; */
+  padding: 10px 14px;
+  width: auto;
+  cursor: pointer;
+  background-color: rgba(0, 109, 94, 0.315);
+  margin: 4px;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 2px 2px 4px #00000090;
+  transition: all 250ms ease-in-out;
+  /* border: 1px solid rgb(37, 37, 37); */
+}
+.elements:hover{
+  background-color: rgba(0, 161, 140, 0.315);
+}
+.elements:hover > .spoiler img{
+  filter: opacity(1);
+  width: 91px;
+}
+
+/* test */
+.thumb {
+  display: grid;
+  justify-content: center;
+}
+.thumb img {
+  height: 108px;
+  width: auto;
+  border-radius: 2px;
+  margin: 12px;
+}
+.tit {
+  /* color: white; */
+  /* color:rgb(0, 0, 0); */
+  font-family: Poppins;
+  font-size: 1em;
+  font-weight: lighter;
+  transition: all 250ms ease-in-out;
+  margin-bottom: 4px;
+  text-shadow: 0px 1px 2px #0000005b;
+}
+
+a{
+  text-decoration: none;
+}
+.tit:hover {
+  color: gray;
+  cursor: pointer;
+  
+}
+.Author{
+  /* color: burlywood; */
+  /* color: rgb(24, 24, 24); */
+}
+.Author span {
+  /* color: rgb(138, 138, 138); */
+  position: absolute;
+  margin-right: 16px;
+  right: 0;
+  cursor: pointer;
+  font-size: 10px;
+  font-family: 'Poppins', sans-serif;
+
+}
+.rating{
+  /* color: rgb(190, 190, 0); */
+  /* color:rgb(46, 46, 46); */
+  font-family: 'Poppins', sans-serif;
+}
+.Genre{
+  margin: 0px 0px;
+  margin-top: 4px;
+  padding: 0px 4px;
+  border-radius: 2px;
+  background-color: rgb(179, 182, 0);
+  color: rgb(0, 0, 0);
+  width: max-content;
+  cursor: pointer;
+  display: inline-block;
+  box-shadow: 1px 1px 1px #0000004b;
+  font-family: 'Poppins', sans-serif;
+  transition: all 350ms ease-in-out;
+}
+.Genre:hover{
+  background-color: #FF4500;
+}
+.pagination_pages{
+  color: white;
+  width: 100%;
+  position: fixed;
+  bottom: 106px;
+  text-align: center;
+}
+.step-links{
+  width: max-content;
+  border-radius: 4px;
+}
+.pagination_pages a,.pagination_pages span{
+  color: white;
+  background-color: black;
+  padding: 4px 4px;
+  cursor: pointer!important;
+}
+.pagination_pages a:hover{
+  color: var(--rd);
+}
+
+.spoiler{
+  position: absolute;
+  height: 0;
+  top: 0px;
+  right: 0;
+  filter: drop-shadow(0px 2px 2px black);
+  text-align: center;
+}
+.spoiler img{
+  filter: opacity(0.8);
+  width: 90px;
+}
