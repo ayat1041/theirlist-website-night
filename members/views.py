@@ -11,6 +11,5 @@ class UserRegistrationView(generic.CreateView):
     success_url = reverse_lazy('login')
 
 
-
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "registration/registration.html" 
