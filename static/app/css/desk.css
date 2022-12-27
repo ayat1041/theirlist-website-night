@@ -793,10 +793,10 @@ comments */
         flex-wrap: wrap;
         background-color: #234d38;
         color: #cabc73d1;
-        height: 160vh;
+        height: max-content;
         flex-direction: column;
         padding: 40px 4%;
-        padding-bottom: 200px;
+        padding-bottom: 400px;
         align-items: center;
         
     }
@@ -833,6 +833,7 @@ comments */
         padding: 4px 0;
         margin: 8px 0;
         margin-bottom: 14px;
+        text-align: center;
     }
     .listform li{
         /* display: none; */

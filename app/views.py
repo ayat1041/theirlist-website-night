@@ -1,5 +1,5 @@
 from platformdirs import user_state_path
-from app.models import List,MusicList,BookList,Review,MusicReview,BookReview,Profile,Starr,MusicStarr,BookStarr
+from app.models import Feedback,List,MusicList,BookList,Review,MusicReview,BookReview,Profile,Starr,MusicStarr,BookStarr
 from django.shortcuts import redirect, render, HttpResponse,HttpResponseRedirect
 from django.urls import reverse_lazy,reverse
 from django.views.generic import UpdateView,TemplateView,ListView,DetailView,CreateView,DeleteView
@@ -8,7 +8,7 @@ from datetime import timedelta
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import ReviewForm,BookReviewForm,MusicReviewForm,StarrForm,MusicStarrForm,BookStarrForm
+from .forms import FeedbackForm,ReviewForm,BookReviewForm,MusicReviewForm,StarrForm,MusicStarrForm,BookStarrForm
 
 # Create your views here.
 
@@ -60,8 +60,8 @@ class AboutUs(LoginRequiredMixin, TemplateView):
 class Chat(TemplateView):
     template_name = 'app/chat_room.html'
 
-class Feedback(TemplateView):
-    template_name = 'app/feedback.html'
+# class Feedback(TemplateView):
+#     template_name = 'app/feedback.html'
 
 class Guidelines(TemplateView):
     template_name = 'app/guidelines.html'
@@ -332,3 +332,11 @@ def create_bookstarr(request):
     else:
         context['form'] = form
         return render(request, "app/already_rated.html", context)
+
+def create_feedback(request):
+    context = {}
+    form = FeedbackForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    context['form'] = form
+    return render(request, "app/feedback.html", context)

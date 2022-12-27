@@ -183,6 +183,14 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username + " | bio : " + self.bio
 
+class Feedback(models.Model):
+    user = models.ManyToManyField(User)
+    subject = models.CharField(max_length=500,unique=True)
+    detail = models.CharField(max_length=5000)
+
+    def __str__(self):
+        return self.subject 
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

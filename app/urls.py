@@ -12,7 +12,6 @@ urlpatterns = [
     path('edit-profile/',views.EditProfile.as_view(),name='edit_profile'),
     path('userposts/',views.userpost,name='userposts'),
     # path('about-us/',login_required(views.AboutUs.as_view()),name='about_us'),
-    path('feedback/',views.Feedback.as_view(),name='feedback'),
     path('guidelines/',views.Guidelines.as_view(),name='guidelines'),
     path('', views.HomeView.as_view(),name='home'),
     path('list/',TheirListView.as_view(),name = 'list'),
@@ -44,5 +43,6 @@ urlpatterns = [
     path('create_starr',views.create_starr, name='create_starr'),
     path('create_musicstarr',views.create_musicstarr, name='create_musicstarr'),
     path('create_bookstarr',views.create_bookstarr, name='create_bookstarr'),
+    path('feedback/',views.create_feedback,name='feedback'),
     
 ]

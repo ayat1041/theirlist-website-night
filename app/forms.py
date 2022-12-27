@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review,MusicReview,BookReview,Starr,MusicStarr,BookStarr
+from .models import Feedback,Review,MusicReview,BookReview,Starr,MusicStarr,BookStarr
 
 # class CommentForm(forms.ModelForm):
 #     class Meta:
@@ -60,4 +60,13 @@ class BookStarrForm(forms.ModelForm):
             "user",
             "list",
             "rate",
+        ]
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = [
+            "user",
+            "subject",
+            "detail",
         ]

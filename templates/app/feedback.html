@@ -4,23 +4,73 @@
 
 <style>
     .feedback{
+        position: relative;
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-        width: 100vw;
-        max-width: 100%;
-        background-color: red;
+        height: max-content;
+        min-height: 100%; 
+        background-color: #234d38;
+        padding-bottom: 120px;
     }
     .feedback h1{
-        color: white;
+        text-align: center;
+        margin-bottom: 22px;
     }
+    .feedback .feedback_username{
+        display: none;
+    }
+    .feedback input,.feedback label,.feedback textarea,.feedback button{
+        padding: 4px 4px;
+        margin: 8px 8px;
+        border: none;
+        border-radius: 2px;
+    }
+    .feedback input,.feedback textarea{
+        width: 80vw;
+    }
+    .feedback button{
+        padding: 8px 8px;
+        color: wheat;
+        background-color: rgb(117, 0, 0);
+        transition: all 300ms ease-in;
+    }
+    .feedback button:hover{
+        background-color: black;
+    }
+
     </style>
     <div class="feedback">
-    <h1>feedback</h1>
-    <h1>yet to be edited</h1>
+        <div>
+            <h1>Please share your feedback</h1>
+        </div>
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+    <select class="feedback_username" name="user" required="" id="id_user" multiple="">
+        <option value="{{user.pk}}" selected="">{{user.username}}</option>
+    </select>
     </div>
+    <div>
+    <label for="id_subject">Subject</label>
+    </div>
+    <div>
+    <input type="text" name="subject" maxlength="500" required="" id="id_subject">
+    </div>
+    <div>
+    <label for="id_detail">Detail</label>
+    </div>
+    <div>
+    <textarea rows="10" name="detail" maxlength="5000" required="" id="id_detail"></textarea>
+    </div>
+    <div>
+    <button type="submit">Send Feedback</button>
+    </div>
+    </form>
+    </div>
+
+
 
 {% endblock content %}
