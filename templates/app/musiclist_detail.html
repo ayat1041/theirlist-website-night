@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="../css/list_detail.css" /> {% endcomment %}
 
 <section class="list_detail" id="list-det-id">
+  <div class="detail_header">
   <h3>{{musiclist.title}}</h3>
   <div class="average-rating">
     <span class="stars-post-comments">
@@ -26,14 +27,6 @@
     <img src="{% static 'app/images/edit-dis.png' %}" />
     {% endif %}
   </div>
-  <style>
-    .detail-up-del {
-      padding: 10px 25px;
-    }
-    .detail-up-del img {
-      height: 14px;
-    }
-  </style>
   <small>Author : {{musiclist.creator.username}}</small><br />
   <small>Date : {{musiclist.posted}}</small><br />
   <div class="genre_wrap">
@@ -44,6 +37,7 @@
       </a>
     </div>
     {% empty %} No tags! {% endfor %}
+  </div>
   </div>
   <div class="blog_post_body">{{musiclist.content|safe}}</div>
   <form class="ratings"></form>

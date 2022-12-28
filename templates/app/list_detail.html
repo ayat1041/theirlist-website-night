@@ -8,6 +8,7 @@
 
 
 <section class="list_detail" id="list-det-id">
+    <div class="detail_header">
     <h3>{{list.title}}</h3>
         <div class="average-rating">
         <span class="stars-post-comments">
@@ -27,19 +28,10 @@
         <img src ="{% static 'app/images/delete-dis.png' %}">
         <img src ="{% static 'app/images/edit-dis.png' %}">
         {% endif %}
-      </div>
-      <style>
-        .detail-up-del{
-            padding: 10px 25px;
-        }
-        .detail-up-del img{
-          height: 14px;
-        }
-      </style>
+    </div>
     <small>Author : {{list.creator.username}}</small><br>
     <small>Date : {{list.posted}}</small><br>
     <div class="genre_wrap">
-
         {% for tag in list.genre.all %}
         <div class="Genre">
             <a href="{% url 'app:film' query=tag %}">
@@ -49,7 +41,8 @@
         {% empty %}
         No tags!
     {% endfor %}
-    </div> 
+    </div>
+    </div>
     <div class="blog_post_body">
         {{list.content|safe}}
     </div>

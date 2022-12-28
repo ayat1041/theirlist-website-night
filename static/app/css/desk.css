@@ -676,7 +676,18 @@ li a .login_sub{
     }
   }
     
+
+.detail_header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 12px;
+    background-color: rgb(19, 19, 19);
+    box-shadow: 0px 2px 3px black;
+}
 .list_detail{
+    display: flex;
+    flex-direction: column;
     animation: 250ms ease-in-out 0s 1 slideIn;
     padding-top: 80px;
     color: black;
@@ -688,23 +699,35 @@ li a .login_sub{
 .list_detail_dark_mode{
     color: white;
 }
+.detail-up-del{
+    padding: 0px 0px;
+    margin-top: 6px;
+    margin-bottom: 8px;
+}
+.detail-up-del img{
+    height: 14px;
+}
 
 .list_detail h3{
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
     font-size: 26px;
     padding: 0px 28px;
     padding-top: 20px;
     font-weight: bold;
 }
 .average-rating{
+    margin-left: -86px;
     padding: 0px 28px;
     margin-top: 7px;
     background-color: #004055;
 }
 .list_detail small{
-    padding: 10px 25px;
+    padding: 0px 0px;
+    margin: -8px 0;
 }
 .genre_wrap{
-    margin-left: 26px;
+    margin-left: 0px;
 }
 .Genre small{
     padding: 0 0;
@@ -896,6 +919,7 @@ comments */
 
 }
 .postcommentscarrier{
+    padding-bottom: 140px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
