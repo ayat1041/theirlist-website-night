@@ -33,6 +33,7 @@ const music_menu = document.getElementById("music-disp");
 const book_menu = document.getElementById("book-disp");
 const comments = document.getElementById("comments-id");
 const posteditcomments = document.getElementById("title-comment");
+const detailheader = document.getElementById("detailheader");
 
 function save() {	
     var checkbox = document.getElementById("dark-switch");
@@ -79,6 +80,7 @@ function darkmode(checkbox) {
         book_menu?.classList.toggle("nav-menu-dark-mode");
         comments?.classList.toggle("commentss-dark-mode");
         posteditcomments?.classList.toggle("title-com-dark-mode");
+        detailheader?.classList.toggle("detail_header_dark");
     }
     else{
         body?.classList.remove("body-dark-mode");
@@ -114,6 +116,7 @@ function darkmode(checkbox) {
         book_menu?.classList.remove("nav-menu-dark-mode");
         comments?.classList.remove("commentss-dark-mode");
         posteditcomments?.classList.remove("title-com-dark-mode");
+        detailheader?.classList.remove("detail_header_dark");
     }
 }
 darkmode(document.getElementById("dark-switch"));
