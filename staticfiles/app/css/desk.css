@@ -260,16 +260,16 @@ body{
 
 .nav-sub-menu-container .movie{
     display: none;
-    margin-left: 12px;
+    margin-left: 40px;
 }
 .nav-sub-menu-container .music{
     display: none;
-    margin-left: 100px;
+    margin-left: 145px;
 
 }
 .nav-sub-menu-container .book{
     display: none;
-    margin-left: 182px;
+    margin-left: 220px;
 
 }
 
@@ -714,7 +714,7 @@ li a .login_sub{
 }
 
 .list_detail h3{
-    font-family: 'Times New Roman', Times, serif;
+    font-family: aktiv-grotesk-condensed-xbold,Arial,sans-serif;
     text-align: center;
     font-size: 26px;
     padding: 0px 28px;
