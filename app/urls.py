@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import BookListUpdateView,MusicListUpdateView,ListUpdateView,MusicListDeleteView,BookListDeleteView,TheirListView,TheirDetailView,ListCreateView,ListDeleteView,TheirListMusicView,TheirListBookView,TheirDetailBookView,TheirDetailMusicView,ListCreateBookView,ListCreateMusicView
+from .views import ProfileUpdate,BookListUpdateView,MusicListUpdateView,ListUpdateView,MusicListDeleteView,BookListDeleteView,TheirListView,TheirDetailView,ListCreateView,ListDeleteView,TheirListMusicView,TheirListBookView,TheirDetailBookView,TheirDetailMusicView,ListCreateBookView,ListCreateMusicView
 from django.contrib.auth.decorators import login_required
 
 app_name = "app"
@@ -44,5 +44,7 @@ urlpatterns = [
     path('create_musicstarr',views.create_musicstarr, name='create_musicstarr'),
     path('create_bookstarr',views.create_bookstarr, name='create_bookstarr'),
     path('feedback/',views.create_feedback,name='feedback'),
+    #path('<int:pk>/ProfileUpdate/',views.ProfileUpdate,name='ProfileUpdate'),
+    path('<int:pk>/ProfileUpdate/',ProfileUpdate.as_view(),name="ProfileUpdate"),
     
 ]

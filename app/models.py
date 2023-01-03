@@ -162,7 +162,7 @@ class BookReview(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.comment+ " | rating : " + str(self.rate) + " | " + self.user.username
+        return self.comment+ " | " + self.user.username
 
 class BookGenre(models.Model):
     name = models.CharField(max_length=150)
@@ -171,25 +171,18 @@ class BookGenre(models.Model):
         return self.name
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
+    #user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
-    profile_pic = models.ImageField(blank=True, default='', upload_to='profiles_pics')
+    #location = models.CharField(max_length=30, blank=True)
+    #birth_date = models.DateField(null=True, blank=True)
+    #profile_pic = models.ImageField(blank=True, default='', upload_to='profiles_pics')
     fav_music_genre = models.ManyToManyField('MusicGenre')
     fav_Book_genre = models.ManyToManyField('BookGenre')
     fav_movie_genre = models.ManyToManyField('Genre')
     
     def __str__(self):
         return self.user.username + " | bio : " + self.bio
-
-class Feedback(models.Model):
-    user = models.ManyToManyField(User)
-    subject = models.CharField(max_length=500,unique=True)
-    detail = models.CharField(max_length=5000)
-
-    def __str__(self):
-        return self.subject 
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -201,9 +194,12 @@ def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
 
+class Feedback(models.Model):
+    user = models.ManyToManyField(User)
+    subject = models.CharField(max_length=500,unique=True)
+    detail = models.CharField(max_length=5000)
 
-
-
-
+    def __str__(self):
+        return self.subject 
 
 

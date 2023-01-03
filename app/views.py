@@ -1,5 +1,5 @@
 from platformdirs import user_state_path
-from app.models import Feedback,List,MusicList,BookList,Review,MusicReview,BookReview,Profile,Starr,MusicStarr,BookStarr
+from app.models import Feedback,List,MusicList,BookList,Review,MusicReview,BookReview,Profile,Starr,MusicStarr,BookStarr,Profile
 from django.shortcuts import redirect, render, HttpResponse,HttpResponseRedirect
 from django.urls import reverse_lazy,reverse
 from django.views.generic import UpdateView,TemplateView,ListView,DetailView,CreateView,DeleteView
@@ -8,9 +8,40 @@ from datetime import timedelta
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import FeedbackForm,ReviewForm,BookReviewForm,MusicReviewForm,StarrForm,MusicStarrForm,BookStarrForm
+from .forms import FeedbackForm,ReviewForm,BookReviewForm,MusicReviewForm,StarrForm,MusicStarrForm,BookStarrForm,ProfileForm
 
 # Create your views here.
+
+class ProfileUpdate(UpdateView):
+    model = Profile
+    fields = [
+            "user",
+            "bio",
+            # "profile_pic",
+            "fav_music_genre",
+            "fav_Book_genre",
+            "fav_movie_genre",
+        ]
+    success_url ="/home/all"
+
+# def ProfileUpdate(request):
+#     if request.method == 'POST':
+#         #user_form = UserForm(request.POST, instance=request.user)
+#         profile_form = ProfileForm(request.POST, instance=request.user.profile)
+#         if profile_form.is_valid(): #and profile_form.is_valid():
+#             #user_form.save()
+#             profile_form.save()
+#             #messages.success(request, _('Your profile was successfully updated!'))
+#             return redirect('app:all')
+#         #else:
+#             #messages.error(request, _('Please correct the error below.'))
+#     #else:
+#         #user_form = UserForm(instance=request.user)
+#         #profile_form = ProfileForm(instance=request.user.profile)
+#     return render(request, 'app/profile_form.html', {
+#         #'user_form': user_form,
+#         'profile_form': profile_form
+#     })
 
 class HomeView(TemplateView):
     template_name = 'index.html'

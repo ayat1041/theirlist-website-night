@@ -9,12 +9,11 @@
     width: 100vw;
     max-width: 100%;
     height: max-content;
-    {% comment %} background-color: green; {% endcomment %}
     margin-top: 12px;
     font-family: 'Poppins', sans-serif;
-    {% comment %} color: wheat; {% endcomment %}
     color: black;
     font-size: 18px;
+    padding-bottom: 200px;
   }
   .title-dark-mode{
     color: white;
@@ -25,83 +24,30 @@
     flex-direction: row;
     justify-content: space-between;
     margin: 18px 22px;
-    {% comment %} background-color: blue; {% endcomment %}
   }
-  .title .tag_ans{
-  }
-  .title .tag_ans form input{
-    border: hidden;
-    border-radius: 2px;
-    outline: none;
-    height: 22px;
-    width: 180px;
-    padding: 0 2px;
-    font-size: 12px;
-  }
-  .title .tag_ans form input::file-selector-button{
-    background-color: teal;
-    border: hidden;
-    border-radius: 4px;
-    outline: none;
-    padding: 2px 2px;
-  }
-  .title .tag_ans form button{
-    border: hidden;
-    outline: none;
-    padding: 1px 4px;
-    border-radius: 2px;
-    height: 22px;
-    color: wheat;
-    color: black;
-    background-color: #0099cc;
-    cursor: pointer;
-    transition: all 300ms ease-in-out;
-  }
-  .title .tag_ans a{
-    {% comment %} color: wheat; {% endcomment %}
-    {% comment %} color: black; {% endcomment %}
-    font-size: 12px;
-  }
-  .title .mail{
-    font-size: 12px;
-  }
-
-  .title .tag_ans form button:hover{
-    background-color: transparent;
+  .profile_edit_form{
+    text-align: center;
+    {% comment %} background-color: green; {% endcomment %}
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   @media only screen and (max-width: 900px) {
     .title{
       font-size: 10px;
     }
-    .title .mail{
-      font-size: 8px;
-    }
-    .title .tag_ans a{
-      font-size: 8px;
-    }
-    
   }
 </style>
 
 
 <div class="title" id="gen-op">
-  <div class="title_content general">General</div>
-  <div class="title_content edit_username"><div class="tagline">Edit Username</div><div class="tag_ans">
-    <form>
-      <input type="text" placeholder="{{user.username}}">
-      <button type="submit">Change</button>
-    </form>
-  </div></div>
-  <div class="title_content edit_profile_pic"><div class="tagline">Change profile picture</div><div class="tag_ans">
-    <form>
-      <input type="file" id="myFile" name="filename">
-      <button type="submit">Upload</button>
-    </form>
-  </div></div>
-  <div class="title_content edit_password"><div class="tagline">Change password</div><div class="tag_ans">
-    <a href="#">Change</a>
-  </div></div>
-  <div class="title_content email"><div class="tagline">Change Email</div><div class="tag_ans mail">{{user.email}}</div></div>
-
+  {% comment %} <div class="title_content general">General</div> {% endcomment %}
+  <div class="profile_edit_form">
+    {% comment %} {% include "app/profile_form.html" %} {% endcomment %}
+    
+    <a href="{% url 'app:ProfileUpdate' request.user.pk %}">Change</a>
+    {{request.user.pk}}
+  </div>
 </div>
 {% endblock %}

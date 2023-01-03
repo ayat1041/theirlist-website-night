@@ -201,7 +201,8 @@
 </div> {% endcomment %}
 <div class="edit_prof">
     <div class = "sidebar">
-        <div class="profile-image"><img src="{{ user.profile.profile_pic.url }}"><a class="user_set_name">//{{user.username}}</a></div>
+        {% comment %} <div class="profile-image"><img src="{{ user.profile.profile_pic.url }}"><a class="user_set_name">//{{user.username}}</a></div> {% endcomment %}
+        <div class="profile-image"><img src="{% static 'app/images/default.jpg' %}"><a class="user_set_name">//{{user.username}}</a></div>
         <div class="options">
             <div class="edit-prof-options">
               <div>
