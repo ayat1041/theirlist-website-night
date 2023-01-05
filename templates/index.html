@@ -218,7 +218,7 @@
         <ul class="login-sub-menu-options">
           {% if user.is_authenticated %}
             <li><a class="username_inlogin">{{user.username}}</a></li><hr>
-            <li><a href="{% url 'app:edit_profile' %}" class="username_inlogin edit">Edit profile</a></li><hr>
+            <li><a href="{% url 'app:profile' %}" class="username_inlogin edit">Edit profile</a></li><hr>
             <li><a href="{% url 'logout' %}">logout<img src="{% static 'app/images/logout.png' %}" class="logout_sub"></a></li>
           {% else %}
             <li><a href="{% url 'login' %}">login<img src="{% static 'app/images/logout.png' %}" class="logout_sub login_sub"></a></li><hr>

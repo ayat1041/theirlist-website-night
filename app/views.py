@@ -8,40 +8,25 @@ from datetime import timedelta
 from django.utils import timezone
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .forms import FeedbackForm,ReviewForm,BookReviewForm,MusicReviewForm,StarrForm,MusicStarrForm,BookStarrForm,ProfileForm
+from .forms import ProfileUpdateForm,FeedbackForm,ReviewForm,BookReviewForm,MusicReviewForm,StarrForm,MusicStarrForm,BookStarrForm
 
 # Create your views here.
+def profile(request):
+    if request.method == 'POST':
+        p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+        #u_form = UserUpdateForm(request.POST,instance=request.user)
+        if p_form.is_valid(): #and u_form.is_valid():
+            #u_form.save()
+            p_form.save()
+            #messages.success(request,'Your Profile has been updated!')
+            return redirect('app:all')
+    else:
+        p_form = ProfileUpdateForm(instance=request.user)
+        #u_form = UserUpdateForm(instance=request.user.profile)
 
-class ProfileUpdate(UpdateView):
-    model = Profile
-    fields = [
-            "user",
-            "bio",
-            # "profile_pic",
-            "fav_music_genre",
-            "fav_Book_genre",
-            "fav_movie_genre",
-        ]
-    success_url ="/home/all"
+    context={'p_form': p_form}
+    return render(request, 'app/profile_form.html',context )
 
-# def ProfileUpdate(request):
-#     if request.method == 'POST':
-#         #user_form = UserForm(request.POST, instance=request.user)
-#         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-#         if profile_form.is_valid(): #and profile_form.is_valid():
-#             #user_form.save()
-#             profile_form.save()
-#             #messages.success(request, _('Your profile was successfully updated!'))
-#             return redirect('app:all')
-#         #else:
-#             #messages.error(request, _('Please correct the error below.'))
-#     #else:
-#         #user_form = UserForm(instance=request.user)
-#         #profile_form = ProfileForm(instance=request.user.profile)
-#     return render(request, 'app/profile_form.html', {
-#         #'user_form': user_form,
-#         'profile_form': profile_form
-#     })
 
 class HomeView(TemplateView):
     template_name = 'index.html'

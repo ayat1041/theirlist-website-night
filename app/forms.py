@@ -71,15 +71,18 @@ class FeedbackForm(forms.ModelForm):
             "detail",
         ]
 
-class ProfileForm(forms.ModelForm):
+class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = [
-            "bio",
-            #"location",
-            #"birth_date",
-            #"profile_pic",
-            "fav_music_genre",
-            "fav_Book_genre",
-            "fav_movie_genre",
+            'bio',
+            'fav_movie_genre',
+            'fav_music_genre',
+            'fav_Book_genre',
         ]
+        labels = {
+        "bio":  "",
+        "fav_movie_genre": "Favourite Genres for Movies",
+        "fav_music_genre": "Favourite Genres for Music",
+        "fav_Book_genre": "Favourite Genres for Books",
+        }

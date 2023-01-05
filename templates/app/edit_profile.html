@@ -44,10 +44,10 @@
 <div class="title" id="gen-op">
   {% comment %} <div class="title_content general">General</div> {% endcomment %}
   <div class="profile_edit_form">
-    {% comment %} {% include "app/profile_form.html" %} {% endcomment %}
-    
-    <a href="{% url 'app:ProfileUpdate' request.user.pk %}">Change</a>
-    {{request.user.pk}}
+    {% include "app/profile_form.html" %}
+    {% comment %} <a href="{% url 'app:profile' %}">Change</a> {% endcomment %}
+    {% comment %}  {% endcomment %}
+    {% comment %} {{request.user.pk}} {% endcomment %}
   </div>
 </div>
 {% endblock %}

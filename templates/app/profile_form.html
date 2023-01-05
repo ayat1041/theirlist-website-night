@@ -1,110 +1,56 @@
+{% extends "app/edit_prof_base.html" %} 
+{% load static %} 
+{% block profile %}
 <style>
-    {% comment %} .profile_edit_username{
-        display: none;
+    .general-settings{
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        color: rgb(0, 109, 94);
+        {% comment %} background-color: red; {% endcomment %}
+        width: 100vw;
+        max-width: 100%; 
+        padding: 8px;
+        padding-bottom: 100px;
+        padding-top: 40px;
     }
-    .profile_edit_form_mess .label{
+    .general-settings select{
+        width: 50vw;
+    }
+    .general-settings textarea{
+        border: none;
+        width: 80vw;
+        border: 1px solid gray;
+    }
+    .general-settings p label{
+        color: rgb(0, 109, 94);
+        display: block;
+        clear: both;
         margin: 8px;
     }
-    .profile_edit_form_mess select{
+    .general-settings button{
         border: none;
-        padding: 8px;
-        text-align: center;
-    }
-    .profile_edit_form_mess textarea{
-        border: none;
-        padding: 8px;
-        font-size: 16px;
-        width: 80vw;
-    }
-    .profile_edit_form_mess button{
-        padding: 6px 16px;
-        border: none;
+        padding: 4px 8px;
         background-color: red;
-        border-radius: 2px;
-        margin-top: 22px;
-        color: wheat;
-        transition: all 300ms ease-in;
+        border-radius: 4px;
+        margin-top: 12px;
     }
-    .profile_edit_form_mess button:hover{
-        background-color: gray;
+    .general-settings .general{
+        margin: 8px 0px;
+        font-size: 18px;
+        font-weight: 900;
     }
-    .genre_favourites{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    @media only screen and (max-width: 900px) {
-        .genre_favourites{
-            display: flex;
-            flex-direction: column;
-        }
-      } {% endcomment %}
+    
 </style>
-<div class="profile_edit_form_mess">
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    {% comment %} <div class="profile_edit_username">
-        <select name="user" id="id_user">
-        <option value="{{user.pk}}" selected="">{{user.username}}</option>
-    </select>
+<div class="general-settings">
+    <div class="general">
+        <p>General</p>
     </div>
-    <div class="about_yourself">
-        <div class="label" ><label for="id_bio">About Yourself</label></div>
-        <div><textarea name="bio" cols="40" rows="10" maxlength="500" id="id_bio">{{user.profile.bio}}</textarea></div>
-    </div>
-    <div class="genre_favourites">
-    <div>
-    <div class="label" ><label class="label" for="id_fav_music_genre">Favourite Music Genres</label></div>
-    <div><select name="fav_music_genre" id="id_fav_music_genre" multiple="">
-      <option value="1">Rock</option>
-      <option value="2">Pop</option>
-      <option value="3">Classic</option>
-      <option value="4">Hip Hop</option>
-      <option value="5">Folk</option>
-      <option value="6">Jazz</option>
-      <option value="7">Blues</option>
-      <option value="8">Metal</option>
-      <option value="9">Psychedelic</option>
-    </select></div>
-</div>
-    <div>
-    <div class="label" ><label class="label" for="id_fav_Book_genre">Favourite Book Genres</label></div>
-    <div>
-    <select name="fav_Book_genre" id="id_fav_Book_genre" multiple="">
-      <option value="1">Action</option>
-      <option value="2">Adventure</option>
-      <option value="3">Romance</option>
-      <option value="4">Mystery</option>
-      <option value="5">Education</option>
-      <option value="6">Crime</option>
-      <option value="7">Thriller</option>
-      <option value="8">Kids</option>
-      <option value="9">Horror</option>
-    </select></div>
-</div>
-    <div>
-        <div class="label" >
-    <label class="label" for="id_fav_movie_genre">Favourite Movie Genres</label></div>
-    <div>
-    <select name="fav_movie_genre" id="id_fav_movie_genre" multiple="">
-      <option value="1">Comedy</option>
-      <option value="2">Thriller</option>
-      <option value="3">Action</option>
-      <option value="4">Drama</option>
-      <option value="5">Crime</option>
-      <option value="6">Mystery</option>
-      <option value="7">Horror</option>
-      <option value="8">Romance</option>
-      <option value="9">Adventure</option>
-      <option value="10">Classic</option>
-      <option value="11">Bengali</option>
-    </select>
-</div>
-</div>
-</div>
-     {% endcomment %}
-     <button type="submit">Save</Button>
+<form method='POST' enctype="multipart/form-data">
+    {%csrf_token%}
+    {% comment %} {{u_form|crispy}} {% endcomment %}
+    {{p_form.as_p}}
+    <button type='submit'>Update</button>
 </form>
 </div>
+{% endblock %}
