@@ -109,7 +109,7 @@ class MusicReview(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.comment+ " | rating : " + str(self.rate) + " | " + self.user.username
+        return self.comment+ " | " + self.user.username
 
 class MusicGenre(models.Model):
     name = models.CharField(max_length=150)
