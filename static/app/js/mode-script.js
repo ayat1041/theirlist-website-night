@@ -34,6 +34,8 @@ const book_menu = document.getElementById("book-disp");
 const comments = document.getElementById("comments-id");
 const posteditcomments = document.getElementById("title-comment");
 const detailheader = document.getElementById("detailheader");
+const editprofdark = document.getElementById("editprofdark");
+
 
 function save() {	
     var checkbox = document.getElementById("dark-switch");
@@ -81,6 +83,7 @@ function darkmode(checkbox) {
         comments?.classList.toggle("commentss-dark-mode");
         posteditcomments?.classList.toggle("title-com-dark-mode");
         detailheader?.classList.toggle("detail_header_dark");
+        editprofdark?.classList.toggle("editdark");
     }
     else{
         body?.classList.remove("body-dark-mode");
@@ -117,6 +120,7 @@ function darkmode(checkbox) {
         comments?.classList.remove("commentss-dark-mode");
         posteditcomments?.classList.remove("title-com-dark-mode");
         detailheader?.classList.remove("detail_header_dark");
+        editprofdark?.classList.remove("editdark");
     }
 }
 darkmode(document.getElementById("dark-switch"));

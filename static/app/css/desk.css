@@ -404,7 +404,7 @@ body{
     width: 18px;
     left: 0px;
     bottom: 0px;
-    background-color: white;
+    background-color: #e5f3a7;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -421,6 +421,7 @@ body{
     -webkit-transform: translateX(18px);
     -ms-transform: translateX(18px);
     transform: translateX(12px);
+    background-color: #c8b9f5;
   }
   
   /* Rounded sliders */

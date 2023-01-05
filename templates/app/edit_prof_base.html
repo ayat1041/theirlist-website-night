@@ -157,6 +157,9 @@
       bottom: 38px;
       z-index: 11;
     }
+    .editdark{
+      background-color: rgb(20, 20, 20);
+    }
     .editdoc-prof .icons img{
         height: 20px;
         margin-top: 6px;
@@ -259,7 +262,7 @@
     {% endblock %}
     </div>
 </div>
-<div class="editdoc-prof">
+<div class="editdoc-prof"  id="editprofdark">
   <div class="icons"><a href="{% url 'app:profile' %}"><img src="{% static 'app/images/edit-prof-profile.png' %}"></a></div>
   <div class="icons"><a href="{% url 'app:userposts' %}"><img src="{% static 'app/images/edit-prof-post.png' %}"></a></div>
   <div class="icons"><a href="{% url 'app:UserComments' %}"><img src="{% static 'app/images/edit-prof-comment.png' %}"></a></div>
