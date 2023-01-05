@@ -14,7 +14,7 @@ from django.dispatch import receiver
 
 class List(models.Model):
     title = models.CharField(max_length=120)
-    genre = models.ManyToManyField('Genre')
+    genre = models.ManyToManyField('Genre',blank=True)
     creator = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True, null=True)
     posted = models.DateTimeField(auto_now_add=True)
     content = RichTextField(null=True,default=' ')
@@ -69,7 +69,7 @@ class Genre(models.Model):
 
 class MusicList(models.Model):
     title = models.CharField(max_length=120)
-    genre = models.ManyToManyField('MusicGenre')
+    genre = models.ManyToManyField('MusicGenre',blank=True)
     creator = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True, null=True)
     posted = models.DateTimeField(auto_now_add=True)
     content = RichTextField(null=True,default=' ')
@@ -123,7 +123,7 @@ class MusicGenre(models.Model):
 class BookList(models.Model):
     title = models.CharField(max_length=120)
     creator = models.ForeignKey(User,on_delete=models.SET_NULL,blank=True, null=True)
-    genre = models.ManyToManyField('BookGenre')
+    genre = models.ManyToManyField('BookGenre',blank=True)
     posted = models.DateTimeField(auto_now_add=True)
     content = RichTextField(null=True,default=' ')
     type = models.CharField(max_length=10,default="book")

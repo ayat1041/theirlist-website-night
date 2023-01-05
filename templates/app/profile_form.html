@@ -12,7 +12,6 @@
         max-width: 100%; 
         padding: 8px;
         padding-bottom: 100px;
-        padding-top: 40px;
     }
     .general-settings select{
         width: 50vw;
@@ -31,26 +30,148 @@
     .general-settings button{
         border: none;
         padding: 4px 8px;
-        background-color: red;
+        background-color: tomato;
         border-radius: 4px;
         margin-top: 12px;
     }
-    .general-settings .general{
-        margin: 8px 0px;
-        font-size: 18px;
+    .user_basic_settings{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        {% comment %} background-color: biscuit; {% endcomment %}
+        width: 100vw;
+        max-width: 100%;
+    }
+    .user_basic_settings .basic_informations{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100vw;
+        max-width: 100%;
+        height: max-content;
+        {% comment %} background-color: pink; {% endcomment %}
+        padding: 8px;
+        padding-bottom: 0px;
+        padding-top: 12px;
+    }
+    .basic_informations .section_title{
+        text-align: center;
+        margin-bottom: 12px;
+    }
+    {% comment %} .basic_informations .bio{
+        text-align: center;
+    } {% endcomment %}
+    .favorite_genre{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        {% comment %} background-color: tomato; {% endcomment %}
+        justify-content: center;
+    }
+    .favorite_genre .movie_fav,
+    .favorite_genre .music_fav,
+    .favorite_genre .book_fav{
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        height: max-content;
+        width: 210px;
+        align-items: center;
+        margin: 0 12px;
+        margin-bottom: 8px;
+        padding-bottom: 10px;
+        background-color: #ffff0012;
+        border-bottom: 2px solid #00000063;
+    }
+    .select_ur_fav{
+        font-family: aktiv-grotesk-condensed-xbold,Arial,sans-serif;
+        padding: 12px 4px;
+        padding-top: 12px;
+        background-color: rgb(0, 109, 94);
+        color: wheat;
+        text-align: center;
         font-weight: 900;
     }
-    
+    .genre_sets_user{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-top: 18px;
+    }
+    .prof_gen{
+        margin: 4px;
+    }
+    .movie_fav_title{
+        font-weight: 900;
+        background-color: rgb(0, 109, 94);
+        color: wheat;
+        padding: 2px 2px;
+        border-radius: 2px;
+        width: 218px;
+        text-align: center;
+        padding: 6px 0px;
+    }
 </style>
-<div class="general-settings">
-    <div class="general">
-        <p>General</p>
+<div class="user_basic_settings">
+    <div class="basic_informations">
+        <div class="section_title">
+            <p></p>
+        </div>
+        {% comment %} <div class="bio">
+            <p>{{user.profile.bio}}</p>
+        </div> {% endcomment %}
+        <div class="favorite_genre">
+                <div class="movie_fav">
+                    <div class="movie_fav_title"><p>Your favourite Movie genres</p></div>
+                    <div class="genre_sets_user">
+                        {% for tag in user.profile.fav_movie_genre.all %}
+                            <div class="Genre prof_gen">
+                                <small>{{ tag }}</small>
+                            </a>
+                            </div>
+                        {% empty %} 
+                            No tags! 
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="music_fav">
+                    <div class="movie_fav_title"><p>Your favourite Music genres</p></div>
+                    <div class="genre_sets_user">
+                        {% for tag in user.profile.fav_music_genre.all %}
+                            <div class="Genre prof_gen">
+                                <small>{{ tag }}</small>
+                            </a>
+                            </div>
+                        {% empty %} 
+                            No tags! 
+                        {% endfor %}
+                        </div>
+                    </div>
+                <div class="book_fav">
+                    <div class="movie_fav_title"><p>Your favourite Book genres</p></div>
+                    <div class="genre_sets_user">
+                        {% for tag in user.profile.fav_Book_genre.all %}
+                            <div class="Genre prof_gen">
+                                <small>{{ tag }}</small>
+                            </a>
+                            </div>
+                        {% empty %} 
+                            No tags! 
+                        {% endfor %}
+                        </div>
+                    </div>
+        </div>
+        <div class= "select_ur_fav">
+            <p>Select your favorite genres so that we can suggest the best lists we have according to your taste!</p>
+        </div>
     </div>
-<form method='POST' enctype="multipart/form-data">
-    {%csrf_token%}
-    {% comment %} {{u_form|crispy}} {% endcomment %}
-    {{p_form.as_p}}
-    <button type='submit'>Update</button>
-</form>
+    <div class="general-settings">
+        <form method='POST' enctype="multipart/form-data">
+            {%csrf_token%}
+            {{p_form.as_p}}
+            <button type='submit'>Update</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

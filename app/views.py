@@ -19,7 +19,8 @@ def profile(request):
             #u_form.save()
             p_form.save()
             #messages.success(request,'Your Profile has been updated!')
-            return redirect('app:all')
+            # return redirect('app:all')
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
     else:
         p_form = ProfileUpdateForm(instance=request.user)
         #u_form = UserUpdateForm(instance=request.user.profile)

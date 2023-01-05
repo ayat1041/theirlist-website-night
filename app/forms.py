@@ -75,13 +75,13 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = [
-            'bio',
+            # 'bio',
             'fav_movie_genre',
             'fav_music_genre',
             'fav_Book_genre',
         ]
         labels = {
-        "bio":  "",
+        # "bio":  "",
         "fav_movie_genre": "Favourite Genres for Movies",
         "fav_music_genre": "Favourite Genres for Music",
         "fav_Book_genre": "Favourite Genres for Books",
