@@ -210,7 +210,7 @@
       </div>
         <div class="doc-stuff-center"><a href="{% url 'app:all' %}" title="home"><img src="{% static 'app/images/home.png' %}" id="home"></a></div>
         <div class="doc-stuff-right">
-          <a href="{% url 'app:chat' %}" title="Chat in the community"><img class="com-chat" src="{% static 'app/images/community.png' %}"></a>
+          <a href="{% url 'rooms' %}" title="Chat in the community"><img class="com-chat" src="{% static 'app/images/community.png' %}"></a>
           <button onClick="javascript:history.go(-1);" title="Go back"><img src="{% static 'app/images/back.png' %}" alt=""></button>
         </div>
     </doc>
@@ -285,6 +285,9 @@
       myhome.src = "{% static 'app/images/home.png' %}";
     }
     </script>
+
+    {% block scripts %}
+    {% endblock %}
   </body>
 
 </html>

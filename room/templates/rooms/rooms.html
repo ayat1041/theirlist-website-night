@@ -1,0 +1,35 @@
+{% extends "index.html" %} 
+{% load static %} 
+{% block content %}
+<style>
+.room_name{
+    padding-bottom: 22px;
+}
+.room_title_head{
+    padding: 8px 0;
+    text-align: center;
+    background-color: rgb(0, 109, 94);
+    color: wheat;
+}
+.room_title_head h1{
+    padding-bottom: 12px;
+}
+</style>
+<div class="room_title_head">
+    <h1> Theirlist Chat Room</h1>
+    <p>Discuss your interests!</p>
+</div>
+<div class="contain-sec">
+    {% for room in rooms %}
+    <div class="elements">
+        <div class="Title">
+            <h4 class="tit room_name" id="tit">{{room.name}}</h4>
+            {% comment %} <a class="join_room" href="">Join</a> {% endcomment %}
+            <div class="Genre">
+                <a href="{% url 'room' room.slug %}"><small>Join</small></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -44,6 +44,7 @@ CKEDITOR_CONFIGS = {
 # Application definition
 
 INSTALLED_APPS = [
+    'room',
     'ckeditor',
     'members',
     'social_django',
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -97,6 +99,15 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'theirlist.wsgi.application'
+ASGI_APPLICATION = 'theirlist.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND' : 'channels.layers.InMemoryChannelLayer'
+    }
+}
+
+
 CSRF_TRUSTED_ORIGINS = [
     'https://theirlist-website-production.up.railway.app/'
 ]
