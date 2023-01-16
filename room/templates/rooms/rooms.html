@@ -14,6 +14,23 @@
 .room_title_head h1{
     padding-bottom: 12px;
 }
+.create_room{
+    padding: 8px 8px;
+    background-color: teal;
+    color: white;
+    border-radius: 4px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 110px;
+    margin-right: 20px;
+    font-style: bold;
+    cursor: pointer;
+    transition: background-color 300ms ease-out;
+}
+.create_room:hover{
+    background-color: #1d1d1d;
+}
 </style>
 <div class="room_title_head">
     <h1> Theirlist Chat Room</h1>
@@ -31,5 +48,6 @@
         </div>
     </div>
     {% endfor %}
+    <a href="" class="create_room">Create a Room</a>
 </div>
 {% endblock content %}
