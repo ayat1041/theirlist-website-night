@@ -35,6 +35,7 @@
 }
 .chat_messages{
     display: flex;
+    position: relative;
     flex-direction: column;
     width: 90vw;
     height: 50vh;
@@ -46,6 +47,39 @@
 .messsage_username{
     color: white;
     padding-bottom: 8px;
+}
+.scroll-top-bot{
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    right: 0;
+    bottom: 0;
+    {% comment %} background-color: pink; {% endcomment %}
+    width: max-content;
+    height: max-content;
+}
+.scroll-chat-top, .scroll-chat-bottom{
+    height: 26px;
+    width: 26px;
+    border-radius: 2px;
+    border: none;
+    font-size: 16px;
+    background-color: teal;
+    color: wheat;
+    margin: 0px 8px;
+    {% comment %} box-shadow: 1px 0px 1px #0000003d; {% endcomment %}
+    box-shadow: none!important;
+    transition: all 250ms ease-in-out; 
+}
+.scroll-chat-top:hover, .scroll-chat-bottom:hover{
+    background-color: #000000d1;
+    height: 28px;
+    width: 28px;
+    color: white;
+}
+.scroll-chat-bottom{
+    transform: rotate(180deg);
+    margin-top: 6px;
 }
 </style>
 <div class="room_title_head">
@@ -67,6 +101,10 @@
         </div>
         {% endif %}
         {% endfor %}
+    </div>
+    <div class="scroll-top-bot">
+        <button class="scroll-chat-top" id="scroll-chat-top"><h1>^</h1></button>
+        <button class="scroll-chat-bottom" id="scroll-chat-bottom"><h1>^</h1></button>
     </div>
 </div>
 <style>
@@ -109,7 +147,22 @@
 {{ room.slug|json_script:"json-roomname" }}
 {{ request.user.username|json_script:"json-username" }}
 <script>
+    const divv = document.querySelector('#chat-messages')
+    const top_btn = document.querySelector('#scroll-chat-top')
+    const bottom_btn = document.querySelector('#scroll-chat-bottom')
+    top_btn.addEventListener('click', () => {
+    divv.scroll({
+        top: 0,
+        behavior: 'smooth'
+    });
+    });
+    bottom_btn.addEventListener('click', () => {
+        divv.scrollTop = divv.scrollHeight;
+    });
+
     window.onload = function() {
+        let scroll_to_bottom = document.getElementById('chat-messages');
+		scroll_to_bottom.scrollTop = scroll_to_bottom.scrollHeight;
     const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
     const userName = JSON.parse(document.getElementById('json-username').textContent);
     const chatSocket = new WebSocket(
