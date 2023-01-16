@@ -1,0 +1,8 @@
+{% extends "index.html" %} 
+{% load static %} 
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {{room_form.as_p}}
+</form>
+{% endblock content %}

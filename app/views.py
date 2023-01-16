@@ -10,7 +10,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .forms import ProfileUpdateForm,FeedbackForm,ReviewForm,BookReviewForm,MusicReviewForm,StarrForm,MusicStarrForm,BookStarrForm
 
-# Create your views here.
 def profile(request):
     if request.method == 'POST':
         p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)

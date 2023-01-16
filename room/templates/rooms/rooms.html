@@ -27,6 +27,7 @@
     font-style: bold;
     cursor: pointer;
     transition: background-color 300ms ease-out;
+    box-shadow: -2px 2px 2px #00000090;
 }
 .create_room:hover{
     background-color: #1d1d1d;
@@ -48,6 +49,7 @@
         </div>
     </div>
     {% endfor %}
-    <a href="" class="create_room">Create a Room</a>
+    <a href="{% url "create_room" %}" class="create_room">Create a Room</a>
+    {% comment %} <a href="" class="create_room">Create a Room</a> {% endcomment %}
 </div>
 {% endblock content %}
