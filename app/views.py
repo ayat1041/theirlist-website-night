@@ -120,6 +120,16 @@ class TheirListView(ListView): #movies
 
 class TheirDetailBookView(DetailView): #books
     model = BookList
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        user = self.request.user
+        book = self.get_object()
+        view, created = Views.objects.get_or_create(user=user, book=book)
+        if not created:
+            view.count += 1
+            view.save()
+        return self.render_to_response(context)
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         modell = BookReview.objects.all()

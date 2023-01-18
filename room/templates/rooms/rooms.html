@@ -3,7 +3,7 @@
 {% block content %}
 <style>
 .room_name{
-    padding-bottom: 22px;
+    padding-bottom: 4px;
 }
 .room_title_head{
     padding: 8px 0;
@@ -42,7 +42,16 @@
     <div class="elements">
         <div class="Title">
             <h4 class="tit room_name" id="tit">{{room.name}}</h4>
-            {% comment %} <a class="join_room" href="">Join</a> {% endcomment %}
+            {% if user.id == room.user.id %}
+            <a href="{% url 'room_delete' room.pk %}"><img src ="{% static 'app/images/delete.png' %}"></a>
+            {% else %}
+            <img src ="{% static 'app/images/delete-dis.png' %}">
+            {% endif %}<br>
+            <small>{{room.topic}}</small>
+            <br>
+            <div class="Author">
+                <small>Owner: {{room.user.username}}</small>
+              </div>
             <div class="Genre">
                 <a href="{% url 'room' room.slug %}"><small>Join</small></a>
             </div>

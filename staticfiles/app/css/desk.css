@@ -845,9 +845,12 @@ comments */
         margin: 8px 0;
         font-size: 1rem;
         color: white;
-        border-radius: 2px;
-        width: 80px;
+        border-radius: 4px;
+        width: max-content;
         transition: all 100ms ease-in-out;
+    }
+    .listform .text-center{
+        margin-bottom: 18px;
     }
     .listform .authentication:hover,.listform  .addlist:hover{
         background-color: #121212;

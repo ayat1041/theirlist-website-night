@@ -1,0 +1,13 @@
+{% extends "index.html" %} 
+{% load static %} 
+{% block content %}
+<div class="listform">
+<h1 class="text-center">Create Room</h1>
+<p>Are you sure you want to delete {{ room.name }}?<br>This can't be undone!</p>
+<form method="post">
+  {% csrf_token %}
+  <button class="addlist" type="submit" value="Confirm">Confirm</button>
+  <button class="addlist"><a href="{% url 'rooms' %}">Cancel</a></button>
+</form>
+</div>
+{% endblock %}
