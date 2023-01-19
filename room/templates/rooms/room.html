@@ -44,6 +44,16 @@
 }
 .message_self{
     background-color: green;
+    border-radius: 23px;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0;
+}
+.self_message_container{
+    display: flex;
+    width: 100%;
+    height: max-content;
+    {% comment %} background-color: yellow; {% endcomment %}
+    flex-direction: row-reverse;
 }
 .chat_messages{
     display: flex;
@@ -55,8 +65,8 @@
     {% comment %} background-image: url('{% static 'app/images/chat_background.jpg' %}'); {% endcomment %}
     {% comment %} background-size: cover; {% endcomment %}
     background-color: #e5e5f7;
-    opacity: 0.8;
-    background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #37a04d 10px ), repeating-linear-gradient( #016d00, #006d5e );
+    {% comment %} opacity: 0.8; {% endcomment %}
+    background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #37a04d90 10px ), repeating-linear-gradient( #016d0070, #006d5e90 );
     border-radius: 4px;
     border: 2px solid teal;
     overflow-y: scroll;
@@ -118,9 +128,11 @@
     <div class="chat_messages" id = "chat-messages">
         {% for message in messages %}
         {% if message.user.username == user.username %}
+        <div class="self_message_container">
         <div class="message message_self">
             <p class="messsage_username">{{ message.user.username }}</p>
             <p class="message_message">{{ message.content }}</p>
+        </div>
         </div>
         {% else %}
         <div class="message">
@@ -200,9 +212,9 @@
     const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
     const userName = JSON.parse(document.getElementById('json-username').textContent);
     const chatSocket = new WebSocket(
-        'wss://'
+        'ws://'
         + window.location.host
-        + '/wss/'
+        + '/ws/'
         + roomName
         + '/'
     );
@@ -212,9 +224,10 @@
         const data = JSON.parse(e.data);
 
         if (data.message) {
-            let html = '<div class="message message_self">';
+            let html = '<div class="self_message_container">';
+                html += '<div class="message message_self">';
                 html += '<p class="messsage_username">' + data.username + '</p>';
-                html += '<p class="message_message">' + data.message + '</p></div>';
+                html += '<p class="message_message">' + data.message + '</p></div></div>';
 
             document.querySelector('#chat-messages').innerHTML += html;
         } else {
