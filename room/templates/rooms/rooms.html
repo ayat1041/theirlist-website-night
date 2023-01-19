@@ -39,7 +39,15 @@
 </div>
 <div class="contain-sec">
     {% for room in rooms %}
-    <div class="elements">
+        {% if room.topic == 'Movie' %}
+        <div class="elements" style="background-color: rgb(177 212 0 / 50%);">
+        {% endif %}
+        {% if room.topic == 'Music' %}
+        <div class="elements" style="background-color: rgb(204 73 0 / 50%);">
+        {% endif %}
+        {% if room.topic == 'Book' %}
+        <div class="elements" style="background-color: rgb(17 204 0 / 50%);">
+        {% endif %}
         <div class="Title">
             <h4 class="tit room_name" id="tit">{{room.name}}</h4>
             {% if user.id == room.user.id %}
@@ -47,7 +55,7 @@
             {% else %}
             <img src ="{% static 'app/images/delete-dis.png' %}">
             {% endif %}<br>
-            <small>{{room.topic}}</small>
+            <small><b>{{room.topic}}</b></small>
             <br>
             <div class="Author">
                 <small>Owner: {{room.user.username}}</small>

@@ -13,10 +13,13 @@ class Room(models.Model):
     
     def __str__(self):
         return self.name  + "  |  " + self.user.username
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(f"{self.name}{self.created}")
+        super(Room, self).save(*args, **kwargs)        
 
 class Message(models.Model):
     room = models.ForeignKey(Room, related_name='messsages', on_delete=models.CASCADE)
-    # user = models.ForeignKey(User, related_name='messsages', on_delete=models.CASCADE)
     user = models.ForeignKey(User,models.CASCADE)
     content = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)

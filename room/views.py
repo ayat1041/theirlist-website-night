@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from .forms import RoomForm
 from django.db.models import QuerySet
 from django.contrib import messages
+from django.utils import timezone
 
 @login_required
 def room(request, slug):
@@ -46,6 +47,20 @@ def room_delete(request, pk):
     return render(request, 'rooms/room_confirm_delete.html', {'room': room})
 
 
+# @login_required
+# def create_room(request):
+#     if request.method == 'POST':
+#         form = RoomForm(request.POST)
+#         if form.is_valid():
+#             room = form.save(commit=False)
+#             room.user = request.user
+#             room.slug = slugify(f"{room.name}{room.created}")
+#             room.save()
+#             return redirect('rooms')
+#     else:
+#         form = RoomForm()
+#     return render(request, 'rooms/create_room.html', {'form': form})
+
 @login_required
 def create_room(request):
     if request.method == 'POST':
@@ -53,7 +68,6 @@ def create_room(request):
         if form.is_valid():
             room = form.save(commit=False)
             room.user = request.user
-            room.slug = slugify(f"{room.name}{room.created}")
             room.save()
             return redirect('rooms')
     else:
