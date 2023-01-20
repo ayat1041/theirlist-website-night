@@ -10,7 +10,7 @@ urlpatterns = [
     path('',RedirectView.as_view(url='home/all')),
     path('members/', include('django.contrib.auth.urls')),
     path('members/', include('members.urls')), 
-    path('oauth/', include('social_django.urls', namespace='social')),
+    # path('oauth/', include('social_django.urls', namespace='social')),
     path('rooms/',include('room.urls')),
 ] 
 if settings.DEBUG:  

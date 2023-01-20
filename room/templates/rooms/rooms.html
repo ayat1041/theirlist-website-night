@@ -32,12 +32,15 @@
 .create_room:hover{
     background-color: #1d1d1d;
 }
+.chat_room_container{
+    padding-bottom: 100px;
+}
 </style>
 <div class="room_title_head">
     <h1> Theirlist Chat Room</h1>
     <p>Discuss your interests!</p>
 </div>
-<div class="contain-sec">
+<div class="contain-sec chat_room_container">
     {% for room in rooms %}
         {% if room.topic == 'Movie' %}
         <div class="elements" style="background-color: rgb(177 212 0 / 50%);">
@@ -58,7 +61,7 @@
             <small><b>{{room.topic}}</b></small>
             <br>
             <div class="Author">
-                <small>Owner: {{room.user.username}}</small>
+                <small>Owner: <b>{{room.user.username}}</b></small>
               </div>
             <div class="Genre">
                 <a href="{% url 'room' room.slug %}"><small>Join</small></a>

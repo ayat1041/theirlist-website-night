@@ -10,23 +10,34 @@ from django.db.models import QuerySet
 from django.contrib import messages
 from django.utils import timezone
 
+# @login_required
+# def room(request, slug):
+#     room = Room.objects.get(slug=slug)
+#     messages = Message.objects.none()
+#     if request.method == 'POST':
+#         password = request.POST.get('password')
+#         if room.password == password:
+#             messages = Message.objects.filter(room=room) [0:25]
+#             #messages.success(request, 'Access granted')
+#             return render(request, 'rooms/room.html', {'room': room, 'messages': messages})
+#         else:
+#             #messages.error(request, 'Access denied: Incorrect Password')
+#             return redirect('rooms')
+#     else:
+#         return render(request, 'rooms/password.html', {'room': room})
+
 @login_required
 def room(request, slug):
     room = Room.objects.get(slug=slug)
-    messages = Message.objects.none()
     if request.method == 'POST':
         password = request.POST.get('password')
         if room.password == password:
-            messages = Message.objects.filter(room=room) [0:25]
-            #messages.success(request, 'Access granted')
+            messages = Message.objects.filter(room=room)[0:25]
             return render(request, 'rooms/room.html', {'room': room, 'messages': messages})
         else:
-            #messages.error(request, 'Access denied: Incorrect Password')
             return redirect('rooms')
     else:
         return render(request, 'rooms/password.html', {'room': room})
-
-
 
 # @login_required
 # def room(request, slug):
